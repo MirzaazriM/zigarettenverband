@@ -1,0 +1,4 @@
+config:
+    dsn: 'mysql:host=localhost;dbname=G6'
+    user: 'root'
+    password: 'root'

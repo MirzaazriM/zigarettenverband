@@ -1,0 +1,5 @@
+check_code:
+    path: '/{lang}'
+    controller: 'App\Controller\Landing::checkCode'
+    requirements:
+        lang: 'de|'

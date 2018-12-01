@@ -1,0 +1,4 @@
+config:
+    dsn: ''
+    user: ''
+    password: ''
