@@ -3,3 +3,7 @@ check_code:
     controller: 'App\Controller\Landing::checkCode'
     requirements:
         lang: 'de|'
+
+upload_file:
+    path: '/upload'
+    controller: 'App\Controller\UploadFile::upload'
