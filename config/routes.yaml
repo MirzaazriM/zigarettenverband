@@ -1,9 +1,15 @@
-check_code:
+landing:
     path: '/{lang}'
-    controller: 'App\Controller\Landing::checkCode'
+    controller: 'App\Controller\LandingController::checkCode'
     requirements:
         lang: 'de|'
 
 upload_file:
     path: '/upload'
-    controller: 'App\Controller\UploadFile::upload'
+    controller: 'App\Controller\UploadFileController::upload'
+    methods: [POST]
+
+check_test:
+    path: '/check/test'
+    controller: 'App\Controller\CheckTestController::checkTest'
+

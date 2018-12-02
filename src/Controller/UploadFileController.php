@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
-use App\Service\Upload;
+use App\Service\UploadService;
 use Symfony\Component\HttpFoundation\Request;
 
-class UploadFile
+class UploadFileController
 {
 
     /**
-     * Upload file controller
+     * UploadService file controller
      *
      * @param Request $request
      */
@@ -27,7 +27,7 @@ class UploadFile
             // check if extension of uploaded file is .csv
             if ($extension === 'csv') {
                 // create service object for calling its method which will upload file, read its values, insert values into database and delete uploaded file afterwards
-                $uploadService = new Upload($name, $fileRaw['tmp_name'][0]);
+                $uploadService = new UploadService($name, $fileRaw['tmp_name'][0]);
                 $uploadService->handleCSV();
 
             } else {

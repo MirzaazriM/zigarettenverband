@@ -1,4 +1,4 @@
 config:
-    dsn: 'mysql:host=localhost;dbname=G6'
+    dsn: 'mysql:host=localhost;dbname=zigarettenverband'
     user: 'root'
     password: 'root'

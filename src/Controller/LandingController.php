@@ -6,8 +6,9 @@ use App\Model\DatabaseCommunicator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
-class Landing extends AbstractController
+class LandingController extends AbstractController
 {
 
     private $dc;
@@ -28,6 +29,10 @@ class Landing extends AbstractController
         if (!empty($id) && preg_match('/[^a-zA-Z0-9]*/', $id)) { // TODO adjust pattern if necessary
             // also check that ref value matches one of the codes entered by the Verbands
             $idSet = $this->dc->checkCode($id);
+
+            // set verbandIds to session so it can be used across all pages of the app
+            $session = new Session();
+            $session->set('code', $id);
         }
 
         // call model for fetching questions data which will be used for filling template placeholders
