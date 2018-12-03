@@ -89,6 +89,12 @@ class DatabaseCommunicator
     }
 
 
+    /**
+     * Get Gutscheincode for the user that passed test after comming from one of the Associations page
+     *
+     * @param string $code
+     * @return array
+     */
     public function getCode(string $code):array {
 
         // initialize codeData variable
@@ -127,6 +133,47 @@ class DatabaseCommunicator
 
 
         return $codeData;
+    }
+
+
+    /**
+     * Check user credentials function
+     *
+     * @param string $email
+     * @param string $password
+     * @return string
+     */
+    public function chechkUserCredentials (string $email, string $password):string {
+
+        // initialize return string
+        $message = '';
+
+        try {
+            // set database instructions
+            $sql = "SELECT email, password FROM associations WHERE email = :email";
+            $statement = $this->connection->prepare($sql);
+            $statement->bindParam(':email', $email, PDO::PARAM_STR);
+            $statement->execute();
+
+            // check if anything returned from database
+            if ($statement->rowCount() > 0) {
+                // if yes fetch it
+                $userData = $statement->fetch(PDO::FETCH_ASSOC);
+
+                // get password from fetched data and verify if it equals to the entered one
+                if (!password_verify($password, $userData['password'])) {
+                    $message = 'Entered password is not valid';
+                }
+
+            } else {
+                $message = 'Entered email is not valid';
+            }
+
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+
+        return $message;
     }
 
 }

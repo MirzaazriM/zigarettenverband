@@ -1,0 +1,24 @@
+
+body {
+
+}
+
+#loginFormContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 380px;
+    margin: 15% auto 0 auto;
+    box-shadow: 2px 3px 2px rgba(150,150,150, 0.5), -2px 0 2px rgba(150,150,150, 0.5);
+}
+
+
+#loginFormContainer > #form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+

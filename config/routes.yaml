@@ -12,4 +12,17 @@ upload_file:
 check_test:
     path: '/check/test'
     controller: 'App\Controller\CheckTestController::checkTest'
+    methods: [POST]
+
+login:
+    path: '/login'
+    controller: 'App\Controller\LoginController::login'
+    methods: [GET, POST]
+
+system:
+    path: '/system'
+    controller: 'App\Controller\SystemController::showSystemData'
+    methods: [GET]
+
+
 

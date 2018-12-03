@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Login page {% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/login_page.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+
+    <div id="loginFormContainer">
+
+        <h2>Log in</h2>
+        <form id="form" action="" method="post">
+            <input type="text" id="emailInput" class="input" />
+            <input type="password" id="passwordInput" class="input" />
+            <input type="submit" name="Log in" id="submitButton"/>
+        </form>
+
+    </div>
+
+{% endblock %}
