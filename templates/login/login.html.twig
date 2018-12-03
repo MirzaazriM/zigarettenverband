@@ -3,6 +3,7 @@
 {% block title %} Login page {% endblock %}
 
 {% block stylesheets %}
+    {{ parent() }}
     <link href="{{ asset('css/login_page.css') }}" rel="stylesheet" />
 {% endblock %}
 
@@ -10,11 +11,26 @@
 
     <div id="loginFormContainer">
 
-        <h2>Log in</h2>
+        <h2> - Login - </h2>
+
         <form id="form" action="" method="post">
-            <input type="text" id="emailInput" class="input" />
-            <input type="password" id="passwordInput" class="input" />
-            <input type="submit" name="Log in" id="submitButton"/>
+
+            <div class="inputWrapper">
+                <div class="imageWrapper"><img src="assets/icons/account.svg" /></div>
+                <input type="text" name="email" id="emailInput" placeholder="Email" value="{{ email }}" class="input" required/>
+            </div>
+
+            <div class="inputWrapper">
+                <div class="imageWrapper"><img src="assets/icons/lock.svg" /></div>
+                <input type="password" name="password" id="passwordInput" placeholder="Password" value="{{ password }}" class="input" required/>
+            </div>
+
+            <p id="errorMessage">{{ error }}</p>
+
+            <div class="submitWrapper">
+                <input type="submit" value="Login" id="submitButton"/>
+            </div>
+
         </form>
 
     </div>

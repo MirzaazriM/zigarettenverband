@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/system.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+
+    <a href="/logout" id="logoutButton"> Logout </a>
+
+{% endblock %}

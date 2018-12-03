@@ -46,13 +46,13 @@ class LoginController extends AbstractController
                 $possibleErrorMessage = 'Invalid email or password format';
             }
 
-            die("after: " . $possibleErrorMessage);
-
         }
 
         // call appropriete template to render and set its necessary data
         return $this->render('/login/login.html.twig', [
-            'error' => isset($possibleErrorMessage) ? $possibleErrorMessage : ''
+            'error' => isset($possibleErrorMessage) ? (' * ' . $possibleErrorMessage) : '',
+            'email' => isset($_POST['email']) ? $_POST['email'] : '',
+            'password' => isset($_POST['password']) ? $_POST['password'] : ''
         ]);
     }
 }

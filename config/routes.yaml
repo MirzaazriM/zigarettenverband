@@ -24,5 +24,8 @@ system:
     controller: 'App\Controller\SystemController::showSystemData'
     methods: [GET]
 
+logout:
+    path: '/logout'
+    controller: 'App\Controller\LogoutController::logout'
 
 

@@ -1,0 +1,33 @@
+body {
+    font-family: 'Roboto', 'sans-serif';
+}
+
+
+#logoutButton {
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: #f45642;
+    width: 80px;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    padding: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    font-family: 'Roboto', 'sans-serif';
+    text-decoration: none;
+}
+
+
+#logoutButton:hover {
+    box-shadow: 1px 2px 1px rgba(150,150,150, 0.5);
+}
+
+
+#logoutButton:active {
+    box-shadow: none;
+}
