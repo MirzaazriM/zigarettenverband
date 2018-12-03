@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Test</title>
+    {% block scripts %}
+        <script src="{{ asset('js/test.js') }}"></script>
+    {% endblock %}
+</head>
+
+<body>
+
+    <h1>You passed with code</h1>
+    <h3>Enter your email: </h3>
+    <input id="emailInput" type="text" />
+    <button onclick="sendEmail()">Send email</button>
+
+</body>
+
+</html>
+

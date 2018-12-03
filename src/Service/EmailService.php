@@ -35,6 +35,10 @@ class EmailService
 
     public function sendEmail() {
 
+        // if code is not null load appropriete template and set code
+        // else load template without code
+
+
         try {
             // server settings
             $this->mail->isSMTP();
@@ -62,6 +66,5 @@ class EmailService
             die($this->mail->ErrorInfo);
         }
 
-        die("mail sended");
     }
 }

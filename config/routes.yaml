@@ -12,7 +12,6 @@ upload_file:
 check_test:
     path: '/check/test'
     controller: 'App\Controller\CheckTestController::checkTest'
-    methods: [POST]
 
 login:
     path: '/login'
@@ -27,5 +26,10 @@ system:
 logout:
     path: '/logout'
     controller: 'App\Controller\LogoutController::logout'
+
+email:
+    path: '/send/email'
+    controller: 'App\Controller\EmailController::checkEmail'
+    methods: [POST]
 
 
