@@ -143,7 +143,7 @@ class DatabaseCommunicator
      * @param string $password
      * @return string
      */
-    public function chechkUserCredentials (string $email, string $password):string {
+    public function checkUserCredentials (string $email, string $password):string {
 
         // initialize return string
         $message = '';
@@ -176,4 +176,65 @@ class DatabaseCommunicator
         return $message;
     }
 
+
+    /**
+     * Get system data for specific user based on email address he/she logged in
+     *
+     * @param string $email
+     * @return array
+     */
+    public function getUserSystemData(string $email) {
+
+        try {
+            // set database instructions
+            $sql = "SELECT 
+                        a.id, 
+                        a.name, 
+                        a.email, 
+                        a.email_text,
+                        SUM(if(ac.code_valid = 'true' AND associations_id = a.id, 1, 0)) AS unused_codes,
+                        SUM(if(ac.code_valid = 'false' AND associations_id = a.id, 1, 0)) AS used_codes
+                    FROM associations AS a
+                    LEFT JOIN association_codes AS ac ON a.id = ac.associations_id
+                    WHERE a.email = ?
+                    GROUP BY a.id";
+            $statement = $this->connection->prepare($sql);
+            $statement->execute([
+                $email
+            ]);
+
+            // fetch data after query execution
+            $data = $statement->fetch(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+
+        // return system data for the user
+        return $data;
+    }
+
+
+    public function updateAssociationInfo(string $email, string $id, string $text) {
+
+        try {
+            // set database instructions
+            $sql = "UPDATE 
+                      associations 
+                    SET email = ?,
+                        email_text = ?
+                    WHERE id = ?";
+            $statement = $this->connection->prepare($sql);
+            $statement->execute([
+                $email,
+                $text,
+                $id
+            ]);
+
+            // check if update finished successfully
+
+        } catch (\PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 }

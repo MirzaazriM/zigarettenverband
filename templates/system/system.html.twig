@@ -1,12 +1,50 @@
-{% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="{{ asset('css/system.css') }}" rel="stylesheet" />
-{% endblock %}
+<!DOCTYPE html>
 
-{% block body %}
+<html>
 
-    <a href="/logout" id="logoutButton"> Logout </a>
+<head>
+    <title>Login page</title>
+    {% block scripts %}
+        {<script src="{{ asset('js/system.js') }}"></script>}
+    {% endblock %}
 
-{% endblock %}
+    {% block stylesheets %}
+        <link href="{{ asset('css/system.css') }}" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    {% endblock %}
+</head>
+
+<body>
+
+<div id="systemContainer">
+
+    <div id="header">
+        <h2> Edit Association data </h2>
+        <a href="/logout" id="logoutButton"> Logout </a>
+    </div>
+
+    <div id="systemData">
+
+        <input id="associationCode" class="inputFields" type="text" value="{{ associationId }}"/>
+        <input id="associationEmail" class="inputFields" type="text" value="{{ associationEmail }}"/>
+        <textarea id="emailText" class="inputFields">{{ emailText }}</textarea>
+
+        <h3> Import Gutscheincodes </h3>
+
+        <div id="uploadContainer">
+            <button id="uploadButton" onclick="openUploadWindow()">Upload Codes</button>
+            <span id="uploadFileName">No file selected</span>
+        </div>
+
+
+        <input id="csvUploadButton" onchange="handleFileUploaded()" type="file" accept=".csv"/>
+
+    </div>
+
+    <button id="saveDataButton" onclick="updateSystemData()">Save</button>
+
+</div>
+</body>
+
+</html>

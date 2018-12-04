@@ -9,11 +9,13 @@ class UploadService
 
     private $filename;
     private $tempname;
+    private $id;
 
-    public function __construct(string $filename, string $tempname)
+    public function __construct(string $filename, string $tempname, string $id)
     {
         $this->filename = $filename;
         $this->tempname = $tempname;
+        $this->id = $id;
     }
 
 
@@ -79,7 +81,7 @@ class UploadService
     public function insertCodes($codes) {
         // create database communicator object and call method for inserting codes values
         $dc = new DatabaseCommunicator();
-        $dc->insertNewCodes($codes, 'demoID5');
+        $dc->insertNewCodes($codes, $this->id);
     }
 
 

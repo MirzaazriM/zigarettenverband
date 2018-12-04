@@ -6,12 +6,18 @@ function sendEmail() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
-            // document.getElementById("demo").innerHTML =
-            //     this.responseText;
+
+            document.getElementById("returnMessage").innerHTML =
+                this.responseText;
+
+            // if email is successfully sended redirect to certain page
         }
     };
     xhttp.open("POST", "/send/email", true);
     xhttp.send(JSON.stringify(
-        {"email": document.getElementById("emailInput").value})
+        {
+            "email": document.getElementById("emailInput").value
+        }
+       )
     );
 }

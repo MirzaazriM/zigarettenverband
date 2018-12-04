@@ -35,10 +35,10 @@ class EmailController extends AbstractController
             $email->sendEmail();
 
             // return email sended
-            return $this->render('<html><body><h2>Email Sended</h2></body></html>');
+            return new JsonResponse('Email sended');
 
         } else {
-            return new JsonResponse("Email not valid");
+            return new JsonResponse("Email not valid, please check it and try again.");
         }
 
     }

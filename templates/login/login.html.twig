@@ -1,38 +1,46 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
 
-{% block title %} Login page {% endblock %}
+<html>
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="{{ asset('css/login_page.css') }}" rel="stylesheet" />
-{% endblock %}
+<head>
+    <title>Login page</title>
+    {% block scripts %}
+        <script src="{{ asset('js/login.js') }}"></script>
+    {% endblock %}
 
-{% block body %}
+    {% block stylesheets %}
+        <link href="{{ asset('css/login_page.css') }}" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    {% endblock %}
+</head>
 
-    <div id="loginFormContainer">
+    <body>
 
-        <h2> - Login - </h2>
+        <div id="loginFormContainer">
 
-        <form id="form" action="" method="post">
+            <h2> - Login - </h2>
 
-            <div class="inputWrapper">
-                <div class="imageWrapper"><img src="assets/icons/account.svg" /></div>
-                <input type="text" name="email" id="emailInput" placeholder="Email" value="{{ email }}" class="input" required/>
+            <div id="form">
+
+                <div class="inputWrapper">
+                    <div class="imageWrapper"><img src="assets/icons/account.svg" /></div>
+                    <input type="text" name="email" id="emailInput" placeholder="Email" class="input" required/>
+                </div>
+
+                <div class="inputWrapper">
+                    <div class="imageWrapper"><img src="assets/icons/lock.svg" /></div>
+                    <input type="password" name="password" id="passwordInput" placeholder="Password" class="input" required/>
+                </div>
+
+                <p id="errorMessage"></p>
+
+                <div class="submitWrapper">
+                    <button id="submitButton" onclick="checkLoginData()">Login</button>
+                </div>
+
             </div>
 
-            <div class="inputWrapper">
-                <div class="imageWrapper"><img src="assets/icons/lock.svg" /></div>
-                <input type="password" name="password" id="passwordInput" placeholder="Password" value="{{ password }}" class="input" required/>
-            </div>
+        </div>
+    </body>
 
-            <p id="errorMessage">{{ error }}</p>
-
-            <div class="submitWrapper">
-                <input type="submit" value="Login" id="submitButton"/>
-            </div>
-
-        </form>
-
-    </div>
-
-{% endblock %}
+</html>

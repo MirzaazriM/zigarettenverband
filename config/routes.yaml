@@ -16,12 +16,22 @@ check_test:
 login:
     path: '/login'
     controller: 'App\Controller\LoginController::login'
-    methods: [GET, POST]
+    methods: [GET]
+
+check_user:
+    path: '/check/user'
+    controller: 'App\Controller\LoginCheckerController::checkUser'
+    methods: [POST]
 
 system:
     path: '/system'
     controller: 'App\Controller\SystemController::showSystemData'
     methods: [GET]
+
+system_edit:
+    path: '/system/edit'
+    controller: 'App\Controller\UpdateAssociationInfoController::editAssociationInfo'
+    methods: [PUT]
 
 logout:
     path: '/logout'
