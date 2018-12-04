@@ -43,6 +43,8 @@ class SystemController extends AbstractController
             'associationId' => $systemData['id'],
             'associationEmail' => $systemData['email'],
             'emailText' => $systemData['email_text'],
+            'used' => $systemData['used_codes'],
+            'unused' => $systemData['unused_codes'],
         ]);
     }
 }

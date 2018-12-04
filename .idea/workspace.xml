@@ -2,10 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="450bdee7-1bf2-46fc-bf9c-a452cd20c582" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/uploaded_resources/thanks_email.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/test_finished/test_passed_with_code.html.twig" afterPath="$PROJECT_DIR$/templates/test_finished/test_passed.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/configuration/developer-info.yml" afterPath="$PROJECT_DIR$/config/configuration/developer-info.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/system.css" afterPath="$PROJECT_DIR$/public/css/system.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/system.js" afterPath="$PROJECT_DIR$/public/js/system.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/CheckTestController.php" afterPath="$PROJECT_DIR$/src/Controller/CheckTestController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/EmailController.php" afterPath="$PROJECT_DIR$/src/Controller/EmailController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/SystemController.php" afterPath="$PROJECT_DIR$/src/Controller/SystemController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/UpdateAssociationInfoController.php" afterPath="$PROJECT_DIR$/src/Controller/UpdateAssociationInfoController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Model/DatabaseCommunicator.php" afterPath="$PROJECT_DIR$/src/Model/DatabaseCommunicator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Service/EmailService.php" afterPath="$PROJECT_DIR$/src/Service/EmailService.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/system/system.html.twig" afterPath="$PROJECT_DIR$/templates/system/system.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,75 +29,56 @@
       <file leaf-file-name="system.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/system.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="44" column="28" lean-forward="false" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
+            <state relative-caret-position="512">
+              <caret line="38" column="28" lean-forward="false" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="system.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/system/system.html.twig">
+      <file leaf-file-name="EmailController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/EmailController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="system.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/css/system.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="23" column="12" lean-forward="false" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UploadFileController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/UploadFileController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="353">
+              <caret line="41" column="38" lean-forward="true" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
               <folding>
-                <element signature="e#34#64#0#PHP" expanded="true" />
+                <element signature="e#34#69#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UpdateAssociationInfoController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/UpdateAssociationInfoController.php">
+      <file leaf-file-name="EmailService.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Service/EmailService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="541">
-              <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+            <state relative-caret-position="86">
+              <caret line="26" column="6" lean-forward="false" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
               <folding>
-                <element signature="e#116#151#0#PHP" expanded="true" />
+                <element signature="e#112#147#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseCommunicator.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DatabaseCommunicator.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Model/DatabaseCommunicator.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="257" column="19" lean-forward="false" selection-start-line="257" selection-start-column="19" selection-end-line="257" selection-end-column="19" />
+            <state relative-caret-position="228">
+              <caret line="272" column="41" lean-forward="false" selection-start-line="272" selection-start-column="41" selection-end-line="272" selection-end-column="41" />
               <folding>
                 <element signature="e#29#37#0#PHP" expanded="true" />
-                <marker date="1543937763099" expanded="true" signature="1066:1218" ph="INSERT INTO association_codes" />
-                <marker date="1543937763099" expanded="true" signature="2269:2410" ph="SELECT code association_codes" />
-                <marker date="1543937763099" expanded="true" signature="2269:2472" ph="SELECT id, c... association_codes" />
-                <marker date="1543937763099" expanded="true" signature="3588:3649" ph="SELECT email... associations" />
-                <marker date="1543937763099" expanded="true" signature="4761:5312" ph="SELECT a.id,... associations" />
-                <marker date="1543937763099" expanded="true" signature="6065:6132" ph="UPDATE assoc... " />
-                <marker date="1543937763099" expanded="true" signature="6065:6133" ph="UPDATE assoc... " />
-                <marker date="1543937763099" expanded="true" signature="6065:6200" ph="UPDATE assoc... " />
-                <marker date="1543937763099" expanded="true" signature="6065:6272" ph="UPDATE assoc... " />
-                <marker date="1543937763099" expanded="true" signature="6704:6796" ph="UPDATE SET... " />
-                <marker date="1543937763099" expanded="true" signature="6704:6937" ph="UPDATE assoc... " />
+                <marker date="1543953451117" expanded="true" signature="1066:1218" ph="INSERT INTO association_codes" />
+                <marker date="1543953451117" expanded="true" signature="2269:2410" ph="SELECT code association_codes" />
+                <marker date="1543953451117" expanded="true" signature="2269:2472" ph="SELECT id, c... association_codes" />
+                <marker date="1543953451117" expanded="true" signature="3588:3649" ph="SELECT email... associations" />
+                <marker date="1543953451117" expanded="true" signature="4761:5312" ph="SELECT a.id,... associations" />
+                <marker date="1543953451117" expanded="true" signature="6065:6132" ph="UPDATE assoc... " />
+                <marker date="1543953451117" expanded="true" signature="6065:6133" ph="UPDATE assoc... " />
+                <marker date="1543953451117" expanded="true" signature="6065:6200" ph="UPDATE assoc... " />
+                <marker date="1543953451117" expanded="true" signature="6065:6272" ph="UPDATE assoc... " />
+                <marker date="1543953451117" expanded="true" signature="6704:6796" ph="UPDATE SET... " />
+                <marker date="1543953451117" expanded="true" signature="6704:6937" ph="UPDATE assoc... " />
+                <marker date="1543953451117" expanded="true" signature="7409:7665" ph="SELECT a.id,... associations" />
               </folding>
             </state>
           </provider>
@@ -129,7 +118,6 @@
         <option value="$PROJECT_DIR$/src/Service/Upload.php" />
         <option value="$PROJECT_DIR$/src/Controller/UploadFile.php" />
         <option value="$PROJECT_DIR$/codes.csv" />
-        <option value="$PROJECT_DIR$/config/configuration/developer-info.yml" />
         <option value="$PROJECT_DIR$/uploaded_resources/test.txt" />
         <option value="$PROJECT_DIR$/src/Controller/LandingController.php" />
         <option value="$PROJECT_DIR$/templates/css/login_page.css" />
@@ -142,11 +130,8 @@
         <option value="$PROJECT_DIR$/templates/test_finished/test_failed.html.twig" />
         <option value="$PROJECT_DIR$/templates/test_finished/test_passed_no_code.html.twig" />
         <option value="$PROJECT_DIR$/src/Service/TestCheckerService.php" />
-        <option value="$PROJECT_DIR$/src/Controller/CheckTestController.php" />
         <option value="$PROJECT_DIR$/templates/tests/test.html.twig" />
-        <option value="$PROJECT_DIR$/src/Service/EmailService.php" />
         <option value="$PROJECT_DIR$/templates/test_finished/test_passed_with_code.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/EmailController.php" />
         <option value="$PROJECT_DIR$/public/js/test.js" />
         <option value="$PROJECT_DIR$/public/js/login.js" />
         <option value="$PROJECT_DIR$/src/Controller/LoginController.php" />
@@ -156,12 +141,18 @@
         <option value="$PROJECT_DIR$/config/routes.yaml" />
         <option value="$PROJECT_DIR$/codes_bayern.csv" />
         <option value="$PROJECT_DIR$/src/Service/UploadService.php" />
-        <option value="$PROJECT_DIR$/src/Controller/SystemController.php" />
-        <option value="$PROJECT_DIR$/templates/system/system.html.twig" />
-        <option value="$PROJECT_DIR$/public/css/system.css" />
         <option value="$PROJECT_DIR$/src/Controller/UploadFileController.php" />
         <option value="$PROJECT_DIR$/src/Controller/UpdateAssociationInfoController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/SystemController.php" />
+        <option value="$PROJECT_DIR$/public/css/system.css" />
+        <option value="$PROJECT_DIR$/templates/system/system.html.twig" />
         <option value="$PROJECT_DIR$/public/js/system.js" />
+        <option value="$PROJECT_DIR$/uploaded_resources/thanks_email.txt" />
+        <option value="$PROJECT_DIR$/config/configuration/developer-info.yml" />
+        <option value="$PROJECT_DIR$/src/Controller/CheckTestController.php" />
+        <option value="$PROJECT_DIR$/templates/test_finished/test_passed.html.twig" />
+        <option value="$PROJECT_DIR$/src/Service/EmailService.php" />
+        <option value="$PROJECT_DIR$/src/Controller/EmailController.php" />
         <option value="$PROJECT_DIR$/src/Model/DatabaseCommunicator.php" />
       </list>
     </option>
@@ -447,38 +438,6 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zigarettenverband" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zigarettenverband" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zigarettenverband" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zigarettenverband" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="configuration" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -488,8 +447,8 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="FullScreen" value="true" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -595,12 +554,12 @@
       <workItem from="1543682372250" duration="8265000" />
       <workItem from="1543743527699" duration="22489000" />
       <workItem from="1543822953498" duration="22773000" />
-      <workItem from="1543909578629" duration="22178000" />
+      <workItem from="1543909578629" duration="30079000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75705000" />
+    <option name="totallyTimeSpent" value="83606000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -649,7 +608,7 @@
         <state relative-caret-position="480">
           <caret line="37" column="62" lean-forward="false" selection-start-line="37" selection-start-column="62" selection-end-line="37" selection-end-column="62" />
           <folding>
-            <element signature="e#34#63#0#PHP" expanded="true" />
+            <element signature="e#70#99#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -677,7 +636,7 @@
         <state relative-caret-position="480">
           <caret line="38" column="42" lean-forward="false" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
           <folding>
-            <element signature="e#112#146#0#PHP" expanded="false" />
+            <element signature="e#148#182#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -820,60 +779,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Service/TestCheckerService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="45" column="19" lean-forward="false" selection-start-line="45" selection-start-column="19" selection-end-line="45" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/CheckTestController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="46" column="10" lean-forward="false" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="43" />
-          <folding>
-            <element signature="e#34#69#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Service/EmailService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="38" column="42" lean-forward="false" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
-          <folding>
-            <element signature="e#112#146#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/configuration/developer-info.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="15" lean-forward="false" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/EmailController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="84" lean-forward="false" selection-start-line="40" selection-start-column="84" selection-end-line="40" selection-end-column="84" />
-          <folding>
-            <element signature="e#34#63#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/test_finished/test_passed_with_code.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="22" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -982,29 +887,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/system/system.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Controller/UpdateAssociationInfoController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="165">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="e#34#69#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/css/system.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="23" column="12" lean-forward="false" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+        <state relative-caret-position="573">
+          <caret line="173" column="17" lean-forward="false" selection-start-line="173" selection-start-column="17" selection-end-line="173" selection-end-column="17" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/SystemController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="38" column="8" lean-forward="false" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
-          <folding>
-            <element signature="e#281#316#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1018,41 +915,112 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/system/system.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="37" column="30" lean-forward="false" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/SystemController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="573">
+          <caret line="46" column="49" lean-forward="false" selection-start-line="46" selection-start-column="49" selection-end-line="46" selection-end-column="49" />
+          <folding>
+            <element signature="e#281#316#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/system.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="44" column="28" lean-forward="false" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
+        <state relative-caret-position="512">
+          <caret line="38" column="28" lean-forward="false" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Service/TestCheckerService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-281">
+          <caret line="45" column="19" lean-forward="false" selection-start-line="45" selection-start-column="19" selection-end-line="45" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uploaded_resources/thanks_email.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="15" lean-forward="false" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/configuration/developer-info.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="19" lean-forward="false" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/CheckTestController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="33" column="48" lean-forward="false" selection-start-line="33" selection-start-column="48" selection-end-line="33" selection-end-column="48" />
+          <folding>
+            <element signature="e#34#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/test_finished/test_passed.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="10" lean-forward="true" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Service/EmailService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="26" column="6" lean-forward="false" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
+          <folding>
+            <element signature="e#112#147#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/EmailController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="41" column="38" lean-forward="true" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
+          <folding>
+            <element signature="e#34#69#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Model/DatabaseCommunicator.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="257" column="19" lean-forward="false" selection-start-line="257" selection-start-column="19" selection-end-line="257" selection-end-column="19" />
+        <state relative-caret-position="228">
+          <caret line="272" column="41" lean-forward="false" selection-start-line="272" selection-start-column="41" selection-end-line="272" selection-end-column="41" />
           <folding>
             <element signature="e#29#37#0#PHP" expanded="true" />
-            <marker date="1543937763099" expanded="true" signature="1066:1218" ph="INSERT INTO association_codes" />
-            <marker date="1543937763099" expanded="true" signature="2269:2410" ph="SELECT code association_codes" />
-            <marker date="1543937763099" expanded="true" signature="2269:2472" ph="SELECT id, c... association_codes" />
-            <marker date="1543937763099" expanded="true" signature="3588:3649" ph="SELECT email... associations" />
-            <marker date="1543937763099" expanded="true" signature="4761:5312" ph="SELECT a.id,... associations" />
-            <marker date="1543937763099" expanded="true" signature="6065:6132" ph="UPDATE assoc... " />
-            <marker date="1543937763099" expanded="true" signature="6065:6133" ph="UPDATE assoc... " />
-            <marker date="1543937763099" expanded="true" signature="6065:6200" ph="UPDATE assoc... " />
-            <marker date="1543937763099" expanded="true" signature="6065:6272" ph="UPDATE assoc... " />
-            <marker date="1543937763099" expanded="true" signature="6704:6796" ph="UPDATE SET... " />
-            <marker date="1543937763099" expanded="true" signature="6704:6937" ph="UPDATE assoc... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/UpdateAssociationInfoController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding>
-            <element signature="e#116#151#0#PHP" expanded="true" />
+            <marker date="1543953451117" expanded="true" signature="1066:1218" ph="INSERT INTO association_codes" />
+            <marker date="1543953451117" expanded="true" signature="2269:2410" ph="SELECT code association_codes" />
+            <marker date="1543953451117" expanded="true" signature="2269:2472" ph="SELECT id, c... association_codes" />
+            <marker date="1543953451117" expanded="true" signature="3588:3649" ph="SELECT email... associations" />
+            <marker date="1543953451117" expanded="true" signature="4761:5312" ph="SELECT a.id,... associations" />
+            <marker date="1543953451117" expanded="true" signature="6065:6132" ph="UPDATE assoc... " />
+            <marker date="1543953451117" expanded="true" signature="6065:6133" ph="UPDATE assoc... " />
+            <marker date="1543953451117" expanded="true" signature="6065:6200" ph="UPDATE assoc... " />
+            <marker date="1543953451117" expanded="true" signature="6065:6272" ph="UPDATE assoc... " />
+            <marker date="1543953451117" expanded="true" signature="6704:6796" ph="UPDATE SET... " />
+            <marker date="1543953451117" expanded="true" signature="6704:6937" ph="UPDATE assoc... " />
+            <marker date="1543953451117" expanded="true" signature="7409:7665" ph="SELECT a.id,... associations" />
           </folding>
         </state>
       </provider>

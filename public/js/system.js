@@ -34,6 +34,9 @@ function updateSystemData() {
 
     // after that update association info
     updateAssociationInfo();
+
+    // reload page
+    location.href = "/system";
 }
 
 

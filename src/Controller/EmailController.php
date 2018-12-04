@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Model\DatabaseCommunicator;
 use App\Service\EmailService;
 use PHPMailer\PHPMailer\PHPMailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Yaml\Yaml;
 
 class EmailController extends AbstractController
 {
@@ -21,18 +23,38 @@ class EmailController extends AbstractController
         // check if email is right formatted
         $emailRegexPattern = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
         if (preg_match($emailRegexPattern, $email)) {
-            // send email with code to the user
+
+            // TODO get Gutscheincode from specific Association, its email, password hash, email subject and email text
+            $associationCode = $session->get('code');
+
+            $emailData = [];
+            if (!is_null($associationCode)) {
+                $dc = new DatabaseCommunicator();
+                $emailData = $dc->getEmailData($associationCode);
+            } else {
+                // read default email data
+                $yaml = Yaml::parse(file_get_contents('../config/configuration/developer-info.yml'));
+                $yamlData = $yaml['info'];
+                // set email parametars into $emailData array
+                $emailData['email'] = $yamlData['email'];
+                $emailData['email_password'] = $yamlData['password'];
+                $emailData['email_text'] = file_get_contents('../uploaded_resources/thanks_email.txt');
+                $emailData['name'] = $yamlData['name'];
+            }
+
             // create emailService object
-            $email = new EmailService(
-                'mirzao@smartlab.ba',
-                'hqivmzmqjodlwahv',
+            $emailHandler = new EmailService(new PHPMailer(true));
+            // send email
+            $emailHandler->sendEmail(
+                $emailData['email'],
                 $email,
-                'Zigaretten Gutscheincode',
-                'You got Gutscheincode.',
-                new PHPMailer(true),
-                $session->get('code')
+                $emailData['email_text'],
+                $emailData['email_password'],
+                $emailData['name'],
+                $associationCode
             );
-            $email->sendEmail();
+
+            // TODO clear session
 
             // return email sended
             return new JsonResponse('Email sended');

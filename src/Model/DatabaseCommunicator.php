@@ -262,4 +262,37 @@ class DatabaseCommunicator
             die($e->getMessage());
         }
     }
+
+
+
+    public function getEmailData(string $code) {
+
+        // TODO check password for emails
+
+        try {
+            // set database instructions 
+            $sql = "SELECT 
+                        a.id,
+                        a.name,
+                        a.email,
+                        a.email_text,
+                        a.email_password
+                   FROM associations AS a 
+                   WHERE id = ?";
+            $statement = $this->connection->prepare($sql);
+            $statement->execute([
+                $code
+            ]);
+
+            // get data
+            $data = $statement->fetch(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+
+        // return data
+        return $data;
+
+    }
 }

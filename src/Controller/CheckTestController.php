@@ -29,15 +29,20 @@ class CheckTestController extends AbstractController
         // check according to $passed value and existence of Association code in session which template to return
         if ($passed == true && isset($sessionCode)) {
             // user passed after coming from one of the Associations page - set appropriete template and data to render
-            $template = 'test_passed_with_code.html.twig';
-            $templateData = [];
+            $template = 'test_passed.html.twig';
+            $templateData = [
+                'message' => 'Test passed - with code'
+            ];
 
             // destroy session code to prevent misuse
-            $session->clear();
+            // TODO implications of destroying session
+            // $session->clear();
         } else if ($passed == true && !isset($sessionCode)) {
             // user passed but he/she didnt came from one of the Associations page - set appropriete template and data to render
-            $template = 'test_passed_no_code.html.twig';
-            $templateData = [];
+            $template = 'test_passed.html.twig';
+            $templateData = [
+                'message' => 'Test passed - no code'
+            ];
         } else {
             // user failed test regardless if he/she came from one of the Associations page - set appropriete template and data to render
             $template = 'test_failed.html.twig';
