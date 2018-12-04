@@ -24,19 +24,16 @@ function handleFileUploaded() {
 }
 
 function updateSystemData() {
-    // update association info
-    updateAssociationInfo();
 
-    // import csv codes
-    // check if any csv file is uploaded
+    // first send request to upload new codes if file is uploaded
     var file = document.getElementById('csvUploadButton').files[0];
     if (file !== undefined) {
-        // if yes upload it to the server
         importCsvCodes();
         console.log("There is file uploaded. Sending...");
-    } else {
-        console.log("No file uploaded");
     }
+
+    // after that update association info
+    updateAssociationInfo();
 }
 
 
@@ -45,6 +42,7 @@ function updateAssociationInfo() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var text = JSON.parse(this.responseText)
+            console.log(text);
         }
     };
     xhttp.open("PUT", '/system/edit');

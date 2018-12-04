@@ -31,10 +31,18 @@ class UpdateAssociationInfoController
 
         // check if data is set and well formatted
         if (preg_match($emailRegexPattern, $email) && preg_match($idRegexPattern, $id) && isset($text)) {
+
+            // save old session id value
+            $oldId = $session->get('id');
+
+            // set new id into session
+            $session->set('id', $id);
+
             // create database Communicator object
             $dc = new DatabaseCommunicator();
             // call its appropriete method to handle updating Association basic info
-            $dc->updateAssociationInfo($email, $id, $text);
+            $dc->updateAssociationInfo($email, $id, $text, $oldId);
+
         } else {
             return new JsonResponse("Bad formatted Association data");
         }

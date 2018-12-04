@@ -215,23 +215,48 @@ class DatabaseCommunicator
     }
 
 
-    public function updateAssociationInfo(string $email, string $id, string $text) {
+    /**
+     * Update Association details function
+     *
+     * @param string $email
+     * @param string $id
+     * @param string $text
+     * @param string $loggedId
+     */
+    public function updateAssociationInfo(string $email, string $id, string $text, string $loggedId) {
 
         try {
             // set database instructions
             $sql = "UPDATE 
                       associations 
-                    SET email = ?,
+                    SET 
+                        id = ?,
+                        email = ?,
                         email_text = ?
                     WHERE id = ?";
             $statement = $this->connection->prepare($sql);
             $statement->execute([
+                $id,
                 $email,
                 $text,
-                $id
+                $loggedId
             ]);
 
-            // check if update finished successfully
+            // check if new id and loggedId are the same
+            if ($id != $loggedId) {
+                // if no update all association_id in association_codes table to new Association code
+                $sqlUpdate = "UPDATE 
+                                association_codes 
+                              SET
+                                associations_id = ?
+                              WHERE 
+                                associations_id = ?";
+                $statementUpdate = $this->connection->prepare($sqlUpdate);
+                $statementUpdate->execute([
+                    $id,
+                    $loggedId
+                ]);
+            }
 
         } catch (\PDOException $e) {
             die($e->getMessage());
