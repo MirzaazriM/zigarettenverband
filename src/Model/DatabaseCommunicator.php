@@ -23,15 +23,36 @@ class DatabaseCommunicator
     }
 
 
+    /**
+     * Check if Associations code is correct
+     *
+     * @param string $id
+     * @return bool
+     */
     public function checkCode(string $id):bool {
 
         try {
+            // set database instructions
+            $sql = "SELECT id FROM associations WHERE id = ?";
+            $statement = $this->connection->prepare($sql);
+            $statement->execute([
+                $id
+            ]);
+
+            // check if there is Association with the given id
+            if ($statement->rowCount()) {
+                $isValid = true;
+            } else {
+                $isValid = false;
+            }
 
         } catch (PDOException $e) {
-
+            $isValid = false;
+            die($e->getMessage());
         }
 
-        return true;
+        // return value
+        return $isValid;
     }
 
 
@@ -48,10 +69,15 @@ class DatabaseCommunicator
     }
 
 
+    /**
+     * Insert new Gutscheincodes uploaded via CSV file
+     *
+     * @param array $codes
+     * @param string $associationId
+     */
     public function insertNewCodes(array $codes, string $associationId) {
 
         try {
-
             // write database instructions
             $sql = "INSERT INTO 
                         association_codes 
@@ -86,53 +112,6 @@ class DatabaseCommunicator
 
         // return correct answers
         return [];
-    }
-
-
-    /**
-     * Get Gutscheincode for the user that passed test after comming from one of the Associations page
-     *
-     * @param string $code
-     * @return array
-     */
-    public function getCode(string $code):array {
-
-        // initialize codeData variable
-        $codeData = [];
-
-        try {
-
-            // set database instructions
-            $sql = "SELECT SQL_CALC_FOUND_ROWS
-                        id, code 
-                    FROM association_codes 
-                    WHERE code_valid = 'true' AND associations_id = ? 
-                    LIMIT 1";
-            $statement = $this->connection->prepare($sql);
-            $statement->execute([
-                $code
-            ]);
-
-            // fetch data
-            if ($statement->rowCount() > 0) {
-                $codeData = $statement->fetch(PDO::FETCH_ASSOC);
-            }
-
-            // get total number of valid codes for specific Association
-            $sqlTotal = "SELECT FOUND_ROWS()";
-            $statementTotal = $this->connection->prepare($sqlTotal);
-            $statementTotal->execute();
-            $totalLeft = $statementTotal->fetch();
-
-            // integrate totalLeft value into codeData
-            $codeData['left'] = $totalLeft[0];
-
-        } catch (PDOException $e) {
-
-        }
-
-
-        return $codeData;
     }
 
 
@@ -264,7 +243,12 @@ class DatabaseCommunicator
     }
 
 
-
+    /**
+     * Get email data of specific Association
+     *
+     * @param string $code
+     * @return mixed
+     */
     public function getEmailData(string $code) {
 
         // TODO check password for emails
@@ -294,5 +278,71 @@ class DatabaseCommunicator
         // return data
         return $data;
 
+    }
+
+
+    /**
+     * Get Gutscheincode from specific Association
+     *
+     * @param string $associationCode
+     * @return mixed
+     */
+    public function getGutscheincode(string $associationCode) {
+
+        try {
+            // set database instructions
+            $sql = "SELECT SQL_CALC_FOUND_ROWS
+                        id, 
+                        code
+                    FROM association_codes 
+                    WHERE associations_id = ? AND code_valid = 'true'
+                    LIMIT 1";  // get id and code so that we can set the code via its id as false if email is successfully sent
+            $statement = $this->connection->prepare($sql);
+            $statement->execute([
+                $associationCode
+            ]);
+
+            // get code
+            $gutscheinCode = $statement->fetch(PDO::FETCH_ASSOC);
+
+            // get total number of valid codes for specific Association
+            $sqlTotal = "SELECT FOUND_ROWS()";
+            $statementTotal = $this->connection->prepare($sqlTotal);
+            $statementTotal->execute();
+            $totalLeft = $statementTotal->fetch();
+
+            // integrate totalLeft value into gutscheinCode data
+            $gutscheinCode['left'] = $totalLeft[0];
+
+        } catch (PDOException $e) {
+            $gutscheinCode = [];
+            die($e->getMessage());
+        }
+
+        // return data
+        return $gutscheinCode;
+    }
+
+
+    /**
+     * Set code used after sent by email and check
+     *
+     * @param int $id
+     */
+    public function setCodeAsUsed(int $id) {
+
+        try {
+            // set database instructions
+            $sql = "UPDATE association_codes
+                    SET code_valid = 'false'
+                    WHERE id = ?";
+            $statement = $this->connection->prepare($sql);
+            $statement->execute([
+                $id
+            ]);
+
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
     }
 }

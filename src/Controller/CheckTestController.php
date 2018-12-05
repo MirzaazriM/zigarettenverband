@@ -35,7 +35,7 @@ class CheckTestController extends AbstractController
             ];
 
             // destroy session code to prevent misuse
-            // TODO implications of destroying session
+            // TODO check implications of destroying session
             // $session->clear();
         } else if ($passed == true && !isset($sessionCode)) {
             // user passed but he/she didnt came from one of the Associations page - set appropriete template and data to render

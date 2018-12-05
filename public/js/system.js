@@ -35,8 +35,10 @@ function updateSystemData() {
     // after that update association info
     updateAssociationInfo();
 
-    // reload page
-    location.href = "/system";
+    // reload page after data is updated (wait 1.5 second to asynchronous requests finish)
+    setTimeout(function(){
+        location.href = "/system";
+    }, 1500);
 }
 
 

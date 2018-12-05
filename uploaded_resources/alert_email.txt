@@ -1,0 +1,5 @@
+<h2> Alert </h2>
+<br/>
+<p> Gutscheincodes left: 10 </p>
+<br/>
+<a href="http://zigarettenverband:8888/login" target="_blank">Visit system page</a>

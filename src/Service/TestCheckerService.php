@@ -79,23 +79,23 @@ class TestCheckerService
         // check if user passed
         if (($totalNumberOfQuestions - $numberOfCorrectAnswers) < 5) {
 
-            // create session object and get VerbandID if present
-            $session = new Session();
-            $verbandId = $session->get('code');
-
-            // check if user camed from Verbands page - if yes call DC for Gutscheincode to send
-            if (isset($verbandId)) {
-
-                // if yes - call DC for getting appropriete Gutscheincode
-                $codeData = $this->dc->getCode($session->get('code'));
-
-                // check if number of left codes is for equal to lowest alert number (for example 10), if yes alert Association about number of valid codes
-                $this->checkSendingAlertEmail($codeData['left']);
-
-            } else {
-                // if no - set codeData to null
-                $codeData = null;
-            }
+//            // create session object and get VerbandID if present
+//            $session = new Session();
+//            $verbandId = $session->get('code');
+//
+//            // check if user camed from Verbands page - if yes call DC for Gutscheincode to send
+//            if (isset($verbandId)) {
+//
+//                // if yes - call DC for getting appropriete Gutscheincode
+//                $codeData = $this->dc->getCode($session->get('code'));
+//
+//                // check if number of left codes is for equal to lowest alert number (for example 10), if yes alert Association about number of valid codes
+//                $this->checkSendingAlertEmail($codeData['left']);
+//
+//            } else {
+//                // if no - set codeData to null
+//                $codeData = null;
+//            }
 
             $userPassed = true;
 

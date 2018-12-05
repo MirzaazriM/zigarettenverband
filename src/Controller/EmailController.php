@@ -14,7 +14,7 @@ use Symfony\Component\Yaml\Yaml;
 class EmailController extends AbstractController
 {
 
-    public function checkEmail(Request $request, SessionInterface $session) {
+    public function checkEmail(Request $request, SessionInterface $session, EmailService $emailHandler) {
 
         // get email from user
         $data = json_decode($request->getContent(), true);
@@ -28,8 +28,12 @@ class EmailController extends AbstractController
             $associationCode = $session->get('code');
 
             $emailData = [];
-            if (!is_null($associationCode)) {
-                $dc = new DatabaseCommunicator();
+            // check if Association code is valid
+            $dc = new DatabaseCommunicator();
+            $isAssociationCodeValid = $dc->checkCode($associationCode);
+
+            // check code and set appropriete email values
+            if (!is_null($associationCode) && $isAssociationCodeValid) {
                 $emailData = $dc->getEmailData($associationCode);
             } else {
                 // read default email data
@@ -43,7 +47,8 @@ class EmailController extends AbstractController
             }
 
             // create emailService object
-            $emailHandler = new EmailService(new PHPMailer(true));
+            // $emailHandler = new EmailService(new PHPMailer(true));
+
             // send email
             $emailHandler->sendEmail(
                 $emailData['email'],
