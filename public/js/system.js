@@ -55,7 +55,7 @@ function updateAssociationInfo() {
         {
             "email": document.getElementById('associationEmail').value,
             "id": document.getElementById('associationCode').value,
-            "text": document.getElementById('emailText').value
+            "text": document.getElementsByClassName('ql-editor')[0].innerHTML // document.getElementById('editor').innerHTML
         }
     ));
 }

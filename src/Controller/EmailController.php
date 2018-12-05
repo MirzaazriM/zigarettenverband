@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Model\DatabaseCommunicator;
 use App\Service\EmailService;
-use PHPMailer\PHPMailer\PHPMailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +13,14 @@ use Symfony\Component\Yaml\Yaml;
 class EmailController extends AbstractController
 {
 
-    public function checkEmail(Request $request, SessionInterface $session, EmailService $emailHandler) {
+    /**
+     * Check sending email - inject Request, SessionInterface and EmailService services
+     * @param Request $request
+     * @param SessionInterface $session
+     * @param EmailService $emailHandler
+     * @return JsonResponse
+     */
+    public function checkEmail(Request $request, SessionInterface $session, EmailService $emailHandler, DatabaseCommunicator $dc) {
 
         // get email from user
         $data = json_decode($request->getContent(), true);
@@ -24,13 +30,17 @@ class EmailController extends AbstractController
         $emailRegexPattern = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
         if (preg_match($emailRegexPattern, $email)) {
 
-            // TODO get Gutscheincode from specific Association, its email, password hash, email subject and email text
+            // get Association code from session if exists
             $associationCode = $session->get('code');
 
+            // set email array which will hold email data
             $emailData = [];
-            // check if Association code is valid
-            $dc = new DatabaseCommunicator();
-            $isAssociationCodeValid = $dc->checkCode($associationCode);
+
+            // first check if Association code is set and valid
+            $isAssociationCodeValid = false;
+            if (!is_null($associationCode)) {
+                $isAssociationCodeValid = $dc->checkCode($associationCode);
+            }
 
             // check code and set appropriete email values
             if (!is_null($associationCode) && $isAssociationCodeValid) {
@@ -45,9 +55,6 @@ class EmailController extends AbstractController
                 $emailData['email_text'] = file_get_contents('../uploaded_resources/thanks_email.txt');
                 $emailData['name'] = $yamlData['name'];
             }
-
-            // create emailService object
-            // $emailHandler = new EmailService(new PHPMailer(true));
 
             // send email
             $emailHandler->sendEmail(

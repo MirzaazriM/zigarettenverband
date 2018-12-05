@@ -7,12 +7,23 @@
     <title> System page </title>
     {% block scripts %}
         {<script src="{{ asset('js/system.js') }}"></script>}
+        <script src="https://cdn.quilljs.com/1.1.6/quill.js"></script>
+
     {% endblock %}
 
     {% block stylesheets %}
         <link href="{{ asset('css/system.css') }}" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link href="https://cdn.quilljs.com/1.1.6/quill.snow.css" rel="stylesheet">
+        <style>
+            #editor {
+                height: 300px;
+                position: relative;
+                bottom: 20px;
+            }
+        </style>
     {% endblock %}
+
 </head>
 
 <body>
@@ -32,7 +43,9 @@
 
         <input id="associationCode" class="inputFields" type="text" value="{{ associationId }}"/>
         <input id="associationEmail" class="inputFields" type="text" value="{{ associationEmail }}"/>
-        <textarea id="emailText" class="inputFields">{{ emailText }}</textarea>
+        {#<textarea id="emailText" class="inputFields">{{ emailText }}</textarea>#}
+
+        <div id="editor"></div>
 
         <p class="codesValues">Used Gutscheincodes: {{ used }}</p>
         <p class="codesValues">Unused Gutscheincodes: {{ unused }}</p>
@@ -49,6 +62,51 @@
     </div>
 
 </div>
+
+<script>
+    var toolbarOptions = [
+        ['link'], // , 'image'
+        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        ['blockquote', 'code-block'],
+
+        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+         //[{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+         //[{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+         //[{ 'direction': 'rtl' }],                         // text direction
+
+        [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+        [{ 'font': [] }],
+        //[{ 'align': [] }]
+
+        ['clean']                                         // remove formatting button
+    ];
+
+    var quill = new Quill('#editor', {
+        modules: {
+            toolbar: toolbarOptions,
+        },
+
+        theme: 'snow'
+    });
+
+    var variable = '{{ emailText}}';
+
+    var decodeHTML = function (html) {
+        var txt = document.createElement('textarea');
+        txt.innerHTML = html;
+        return txt.value;
+    };
+
+    variable = decodeHTML(variable);
+
+    document.getElementsByClassName('ql-editor')[0].innerHTML = variable;
+
+
+</script>
 </body>
 
 </html>
