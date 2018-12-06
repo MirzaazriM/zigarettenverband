@@ -11,13 +11,13 @@ class UploadFileController
 {
 
     /**
-     * UploadService file controller
+     * Upload file controller
+     * Inject Request and SessionInterface services
      *
      * @param Request $request
      * @return JsonResponse
      */
     public function upload(Request $request, SessionInterface $session) {
-
         // check if there is sended file in the request object
         if (count($request->files->all()) > 0) {
             // if yes, set file to the fileRaw variable

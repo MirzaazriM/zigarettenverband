@@ -47,7 +47,6 @@ class DatabaseCommunicator
             }
 
         } catch (PDOException $e) {
-            $isValid = false;
             die($e->getMessage());
         }
 
@@ -56,6 +55,11 @@ class DatabaseCommunicator
     }
 
 
+    /**
+     * TODO Fetch test questions
+     *
+     * @return array
+     */
     public function getQuestions():array {
 
         try {
@@ -65,7 +69,6 @@ class DatabaseCommunicator
         }
 
         return [];
-
     }
 
 
@@ -120,12 +123,9 @@ class DatabaseCommunicator
      *
      * @param string $email
      * @param string $password
-     * @return string
+     * @return int
      */
-    public function checkUserCredentials (string $email, string $password):string {
-
-        // initialize return string
-        $message = '';
+    public function checkUserCredentials (string $email, string $password):int {
 
         try {
             // set database instructions
@@ -134,6 +134,9 @@ class DatabaseCommunicator
             $statement->bindParam(':email', $email, PDO::PARAM_STR);
             $statement->execute();
 
+            // by default code is 200
+            $code = 200;
+
             // check if anything returned from database
             if ($statement->rowCount() > 0) {
                 // if yes fetch it
@@ -141,18 +144,19 @@ class DatabaseCommunicator
 
                 // get password from fetched data and verify if it equals to the entered one
                 if (!password_verify($password, $userData['password'])) {
-                    $message = 'Entered password is not valid';
+                    $code = 401;
                 }
 
             } else {
-                $message = 'Entered email is not valid';
+                $code = 401; // email
             }
 
         } catch (PDOException $e) {
             die($e->getMessage());
         }
 
-        return $message;
+        // return code value
+        return $code;
     }
 
 
@@ -235,6 +239,8 @@ class DatabaseCommunicator
                     $id,
                     $loggedId
                 ]);
+
+                // TODO check what to do which generates after user comes from one of its pages ? send request to some API
             }
 
         } catch (\PDOException $e) {
@@ -251,7 +257,7 @@ class DatabaseCommunicator
      */
     public function getEmailData(string $code) {
 
-        // TODO check password for emails
+        // TODO check passwords for emails
 
         try {
             // set database instructions 
@@ -296,7 +302,7 @@ class DatabaseCommunicator
                         code
                     FROM association_codes 
                     WHERE associations_id = ? AND code_valid = 'true'
-                    LIMIT 1";  // get id and code so that we can set the code via its id as false if email is successfully sent
+                    LIMIT 1";  // get id and code so that we can set the code via its id as used (false) if email is successfully sent
             $statement = $this->connection->prepare($sql);
             $statement->execute([
                 $associationCode
@@ -305,7 +311,7 @@ class DatabaseCommunicator
             // get code
             $gutscheinCode = $statement->fetch(PDO::FETCH_ASSOC);
 
-            // get total number of valid codes for specific Association
+            // get total number of valid codes for specific Association - to check if number of valid codes is under the limit
             $sqlTotal = "SELECT FOUND_ROWS()";
             $statementTotal = $this->connection->prepare($sqlTotal);
             $statementTotal->execute();
@@ -315,7 +321,6 @@ class DatabaseCommunicator
             $gutscheinCode['left'] = $totalLeft[0];
 
         } catch (PDOException $e) {
-            $gutscheinCode = [];
             die($e->getMessage());
         }
 
@@ -325,7 +330,7 @@ class DatabaseCommunicator
 
 
     /**
-     * Set code used after sent by email and check
+     * Set code as used after sent by email
      *
      * @param int $id
      */

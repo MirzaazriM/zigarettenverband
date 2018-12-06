@@ -2,20 +2,26 @@
 
 <html>
 
-<head>
-    <title>Login page</title>
-    {% block scripts %}
-        <script src="{{ asset('js/login.js') }}"></script>
-    {% endblock %}
+    <head>
 
-    {% block stylesheets %}
-        <link href="{{ asset('css/login_page.css') }}" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    {% endblock %}
-</head>
+        <title>Login page</title>
+
+        <!-- Scripts -->
+        {% block scripts %}
+            <script src="{{ asset('js/login.js') }}"></script>
+        {% endblock %}
+
+        <!-- Stylesheets -->
+        {% block stylesheets %}
+            <link href="{{ asset('css/login_page.css') }}" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        {% endblock %}
+
+    </head>
 
     <body>
 
+        <!-- Login form -->
         <div id="loginFormContainer">
 
             <h2> - Login - </h2>
@@ -35,6 +41,7 @@
                 <p id="errorMessage"></p>
 
                 <div class="submitWrapper">
+                    <!-- On click check user credentials nad redirect if user is valid -->
                     <button id="submitButton" onclick="checkLoginData()">Login</button>
                 </div>
 

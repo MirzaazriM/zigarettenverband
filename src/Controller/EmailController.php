@@ -14,49 +14,41 @@ class EmailController extends AbstractController
 {
 
     /**
-     * Check sending email - inject Request, SessionInterface and EmailService services
+     * Check sending email to the user
+     * Inject Request, SessionInterface, EmailService and DatabaseCommunicator services
+     *
      * @param Request $request
      * @param SessionInterface $session
      * @param EmailService $emailHandler
+     * @param DatabaseCommunicator $dc
      * @return JsonResponse
      */
     public function checkEmail(Request $request, SessionInterface $session, EmailService $emailHandler, DatabaseCommunicator $dc) {
-
-        // get email from user
+        // first get email from user
         $data = json_decode($request->getContent(), true);
         $email = $data['email'];
 
-        // check if email is right formatted
+        // set email regex pattern
         $emailRegexPattern = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
-        if (preg_match($emailRegexPattern, $email)) {
 
-            // get Association code from session if exists
+        // create response object
+        $response = new JsonResponse("Response");
+
+        // check if email is right formatted
+        if (preg_match($emailRegexPattern, $email)) {
+            // get Association code from session if exists - this is necessary so that we take correct Gutscheincode from the database
             $associationCode = $session->get('code');
 
-            // set email array which will hold email data
-            $emailData = [];
-
-            // first check if Association code is set and valid
+            // first check if Association code is valid
             $isAssociationCodeValid = false;
             if (!is_null($associationCode)) {
                 $isAssociationCodeValid = $dc->checkCode($associationCode);
             }
 
-            // check code and set appropriete email values
-            if (!is_null($associationCode) && $isAssociationCodeValid) {
-                $emailData = $dc->getEmailData($associationCode);
-            } else {
-                // read default email data
-                $yaml = Yaml::parse(file_get_contents('../config/configuration/developer-info.yml'));
-                $yamlData = $yaml['info'];
-                // set email parametars into $emailData array
-                $emailData['email'] = $yamlData['email'];
-                $emailData['email_password'] = $yamlData['password'];
-                $emailData['email_text'] = file_get_contents('../uploaded_resources/thanks_email.txt');
-                $emailData['name'] = $yamlData['name'];
-            }
+            // set email parameteres
+            $emailData = $emailHandler->setEmailParameters($isAssociationCodeValid, $dc, $associationCode);
 
-            // send email
+            // send email by calling EmailService sendEmail function and passing correct parameters
             $emailHandler->sendEmail(
                 $emailData['email'],
                 $email,
@@ -66,14 +58,18 @@ class EmailController extends AbstractController
                 $associationCode
             );
 
-            // TODO clear session
+            // TODO clear session and check implications
 
-            // return email sended
-            return new JsonResponse('Email sended');
+            // set response status code
+            $response->setStatusCode(200);
 
         } else {
-            return new JsonResponse("Email not valid, please check it and try again.");
+            // set response status code
+            $response->setStatusCode(404);
         }
+
+        // return response
+        return $response;
 
     }
 }

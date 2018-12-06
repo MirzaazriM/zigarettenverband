@@ -10,32 +10,39 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class CheckTestController extends AbstractController
 {
 
+    /**
+     * Function for showing appropriete page depending on if user passed the test or not
+     * Inject SessionInterface service
+     *
+     * @param Request $request
+     * @param SessionInterface $session
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function checkTest(Request $request, SessionInterface $session) {
+        // TODO get sended answers and question ids from the request
 
-        // get sended answer and question ids
-
-        // call service to check how many questions are correct
+        // create TestChecker object and pass necessary constructor arguments
         $check = new TestCheckerService([
             '1' => 'a',
             '5' => 'd,e'
         ]);
 
-        // call service method and check test answers
+        // TODO call service method and check test answers - current dummy response
         $passed = $check->checkTest();
+
         // get session Association code if exits
         $sessionCode = $session->get('code');
 
-        // check according to $passed value and existence of Association code in session which template to return
+        // check $passed value and existence of Association code in session which template to return
         if ($passed == true && isset($sessionCode)) {
-            // user passed after coming from one of the Associations page - set appropriete template and data to render
+            // user passed the test after coming from one of the Associations page - set appropriete template and data to render
             $template = 'test_passed.html.twig';
             $templateData = [
                 'message' => 'Test passed, enter email for Gutscheincode'
             ];
 
-            // destroy session code to prevent misuse
-            // TODO check implications of destroying session
-            // $session->clear();
+            // TODO check destroying session and its implications
+
         } else if ($passed == true && !isset($sessionCode)) {
             // user passed but he/she didnt came from one of the Associations page - set appropriete template and data to render
             $template = 'test_passed.html.twig';
@@ -48,7 +55,7 @@ class CheckTestController extends AbstractController
             $templateData = [];
         }
 
-        // return template to show if user passed or not passed test
+        // return template to show if user passed or not passed the test, and set data for the template
         return $this->render('test_finished/' . $template, $templateData);
     }
 }

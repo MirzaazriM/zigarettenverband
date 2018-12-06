@@ -14,8 +14,15 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class SystemController extends AbstractController
 {
 
+    /**
+     * Show system page to the user after user succcesfully logged in
+     * Inject SessionInterface and DatabaseCommunicator services
+     *
+     * @param SessionInterface $session
+     * @param DatabaseCommunicator $dc
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function showSystemData (SessionInterface $session, DatabaseCommunicator $dc) {
-
         // get logged value from session
         $userLogged = $session->get('logged');
 
@@ -27,7 +34,7 @@ class SystemController extends AbstractController
             exit();
         }
 
-        // call appropriete method form DC for specific user data
+        // call appropriete method from DC for specific user data
         $systemData = $dc->getUserSystemData($session->get('email'));
 
         // set association id as session variable to use accross all pages

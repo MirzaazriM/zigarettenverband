@@ -3,138 +3,154 @@
 
 <html>
 
-<head>
-    <title> System page </title>
-    {% block scripts %}
-        {<script src="{{ asset('js/system.js') }}"></script>}
-        <script src="https://cdn.quilljs.com/1.1.6/quill.js"></script>
+    <head>
 
-    {% endblock %}
+        <title> System page </title>
 
-    {% block stylesheets %}
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href="https://cdn.quilljs.com/1.1.6/quill.snow.css" rel="stylesheet">
-        <link href="{{ asset('css/system.css') }}" rel="stylesheet" />
-        <style>
-            #editor {
-                height: 300px;
-                position: relative;
-                bottom: 20px;
-            }
+        <!-- Include scripts -->
+        {% block scripts %}
+            {<script src="{{ asset('js/system.js') }}"></script>}
+            <script src="https://cdn.quilljs.com/1.1.6/quill.js"></script>
+        {% endblock %}
 
-            .ql-container.ql-snow {
-                //border-radius: 5px;
-                border: none;
-                outline: none;
-                box-shadow: 1px 2px 1px rgba(150, 150, 150, 0.5), -1px 0 1px rgba(150, 150, 150, 0.5);
-            }
+        <!-- Include stylesheets -->
+        {% block stylesheets %}
+            <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+            <!-- Import Quill.js as CDN -->
+            <link href="https://cdn.quilljs.com/1.1.6/quill.snow.css" rel="stylesheet">
+            <link href="{{ asset('css/system.css') }}" rel="stylesheet" />
 
-            .ql-toolbar.ql-snow {
-                //border-top-left-radius: 5px;
-                //border-top-right-radius: 5px;
-                border: none;
-                outline: none;
-                box-shadow: 1px 2px 1px rgba(150, 150, 150, 0.5), -1px 0 1px rgba(150, 150, 150, 0.5);
-            }
-        </style>
-    {% endblock %}
+            <style>
 
-</head>
+                #editor {
+                    height: 300px;
+                    position: relative;
+                    bottom: 20px;
+                }
 
-<body>
+                .ql-container.ql-snow {
+                    border: none;
+                    outline: none;
+                    box-shadow: 1px 2px 1px rgba(150, 150, 150, 0.5), -1px 0 1px rgba(150, 150, 150, 0.5);
+                }
 
-<div id="systemContainer">
+                .ql-toolbar.ql-snow {
+                    border: none;
+                    outline: none;
+                    box-shadow: 1px 2px 1px rgba(150, 150, 150, 0.5), -1px 0 1px rgba(150, 150, 150, 0.5);
+                }
 
-    <div id="header">
-        <h2> {{ name }} </h2>
-        <div id="buttons">
-            <a href="/logout" id="logoutButton"><img src="assets/icons/power-button.svg" /></a>
-            {#<button id="saveDataButton" onclick="updateSystemData()">Save</button>#}
-            <div id="saveDataButton" onclick="updateSystemData()">
-                <!-- Set given icon value -->
-                <img src="assets/icons/content-save.svg" />
-            </div>
-        </div>
+            </style>
 
-    </div>
+        {% endblock %}
 
-    <div id="systemData">
+    </head>
 
-        <input id="associationCode" class="inputFields" type="text" value="{{ associationId }}"/>
+    <!-- Body of the template -->
+    <body>
 
-        <input id="associationEmail" class="inputFields" type="text" value="{{ associationEmail }}"/>
-        {#<textarea id="emailText" class="inputFields">{{ emailText }}</textarea>#}
+        <div id="systemContainer">
 
-        <div id="editor"></div>
+            <div id="header">
+                <!-- Set Association name -->
+                <h2> {{ name }} </h2>
 
-
-        <div id="gutscheincodesArea">
-
-            <div id="leftArea">
-                <p class="codesValues"> Un/used Gutscheincodes: {{ unused }} / {{ used }} </p>
-            </div>
-
-            <div id="rightArea">
-                <h3> Import Gutscheincodes </h3>
-
-                <div id="uploadContainer">
-                    <button id="uploadButton" onclick="openUploadWindow()">Upload Codes</button>
-                    <span id="uploadFileName">No file selected</span>
+                <!-- Logout and save buttons -->
+                <div id="buttons">
+                    <a href="/logout" id="logoutButton"><img src="assets/icons/power-button.svg" /></a>
+                    <div id="saveDataButton" onclick="updateSystemData()">
+                        <img src="assets/icons/content-save.svg" />
+                    </div>
                 </div>
+
+            </div>
+
+
+            <div id="systemData">
+
+                <!-- Input for editing Association id -->
+                <input id="associationCode" class="inputFields" type="text" value="{{ associationId }}" />
+
+                <!-- Input for Association email -->
+                <input id="associationEmail" class="inputFields" type="text" value="{{ associationEmail }}" />
+
+                <!-- Element which holds Quills.js editor -->
+                <div id="editor"></div>
+
+                <!-- Element which holds data about Gutscheincodes -->
+                <div id="gutscheincodesArea">
+
+                    <div id="rightArea">
+                        <h3> Import Gutscheincodes </h3>
+
+                        <div id="uploadContainer">
+                            <!-- Fake button for uploading more Gutscheincodes via .csv file -->
+                            <button id="uploadButton" onclick="openUploadWindow()">Upload Codes</button>
+                            <span id="uploadFileName">No file selected</span>
+                        </div>
+                    </div>
+
+                    <div id="leftArea">
+                        <p class="codesValues"> Un/used Gutscheincodes: {{ unused }} / {{ used }} </p>
+                    </div>
+
+                </div>
+
+                <!-- Hidden element -->
+                <input id="csvUploadButton" onchange="handleFileUploaded()" type="file" accept=".csv"/>
+
             </div>
 
         </div>
 
-        <!-- Hidden element -->
-        <input id="csvUploadButton" onchange="handleFileUploaded()" type="file" accept=".csv"/>
+        <!-- Script for handling Quills.js appearence -->
+        <script>
+            // set which options editor has
+            var toolbarOptions = [
+                ['bold', 'italic', 'underline', 'strike', 'link'],        // toggled buttons
+                ['blockquote'], // 'code-block'
+                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'font': [] }],
+                ['clean']               // remove formatting button
+                //[{ 'align': [] }]
+                //[{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+                //[{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+                //[{ 'direction': 'rtl' }],                         // text direction
+            ];
 
-    </div>
+            // create new quill editor on div#editor
+            var quill = new Quill('#editor', {
+                // set modules for the editor and set it toolbar options defined above
+                modules: {
+                    toolbar: toolbarOptions,
+                },
 
-</div>
+                // set editor theme (this one is good)
+                theme: 'snow'
+            });
 
-<script>
-    var toolbarOptions = [
-        ['bold', 'italic', 'underline', 'strike', 'link'],        // toggled buttons
-        ['blockquote'], // 'code-block'
+            // get emailText passed from the PHP script
+            var variable = '{{ emailText}}';
 
-        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-         //[{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-         //[{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-         //[{ 'direction': 'rtl' }],                         // text direction
+            // function for decoding encoded HTML
+            var decodeHTML = function (html) {
+                var txt = document.createElement('textarea');
+                txt.innerHTML = html;
+                return txt.value;
+            };
 
-        [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            // get decoded HTML
+            variable = decodeHTML(variable);
 
-        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-        [{ 'font': [] }],
-        //[{ 'align': [] }]
+            // set decoded HTML into editor div#editor > div.ql-editor
+            document.getElementsByClassName('ql-editor')[0].innerHTML = variable;
 
-        ['clean']                                         // remove formatting button
-    ];
+        </script>
 
-    var quill = new Quill('#editor', {
-        modules: {
-            toolbar: toolbarOptions,
-        },
-
-        theme: 'snow'
-    });
-
-    var variable = '{{ emailText}}';
-
-    var decodeHTML = function (html) {
-        var txt = document.createElement('textarea');
-        txt.innerHTML = html;
-        return txt.value;
-    };
-
-    variable = decodeHTML(variable);
-
-    document.getElementsByClassName('ql-editor')[0].innerHTML = variable;
-
-
-</script>
-</body>
+    </body>
 
 </html>

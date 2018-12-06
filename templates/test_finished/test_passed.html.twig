@@ -3,18 +3,23 @@
 <html>
 
     <head>
+
         <title>Test</title>
 
+        <!-- Include scripts -->
         {% block scripts %}
             <script src="{{ asset('js/test.js') }}"></script>
         {% endblock %}
 
+        <!-- Include stylesheets -->
         {% block stylesheets %}
             <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
             <link href="{{ asset('css/test_passed.css') }}" rel="stylesheet" />
         {% endblock %}
+
     </head>
 
+    <!-- Set template body -->
     <body>
 
         <h1> {{ message }} </h1>
@@ -24,7 +29,6 @@
             <input id="emailInput" type="text" />
             <button onclick="sendEmail()">Send email</button>
         </div>
-
 
         <br/>
         <p id="returnMessage"></p>

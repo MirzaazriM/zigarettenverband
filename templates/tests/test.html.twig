@@ -3,16 +3,21 @@
 <html>
 
     <head>
+
         <title>Test</title>
 
+        <!-- Imported stylesheets -->
         {% block stylesheets %}
             <link href="{{ asset('css/test.css') }}" rel="stylesheet" />
         {% endblock %}
+
     </head>
 
     <body>
+        <!-- Heading -->
         <h1>Test Questions</h1>
 
+        <!-- List questions -->
         <ol id="testList">
             {% for question in questions %}
                 <li value="{{ question }}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam {{ question }}?</li>
@@ -21,12 +26,10 @@
 
         <br/>
 
-        {#<a href="/check/test"> Check result of the test </a>#}
         <form action="/check/test" method="post">
+            <!-- Send given answers of the test to the backend for validation and redirect to /check/page test -->
             <input id="submitButton" type="submit" value="Finish"/>
         </form>
-
-        {#<button onclick="sendData()">Click</button>#}
 
     </body>
 

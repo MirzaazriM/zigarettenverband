@@ -10,9 +10,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class UpdateAssociationInfoController
 {
 
-    public function editAssociationInfo(Request $request, SessionInterface $session) {
 
-        // get sended data
+    public function editAssociationInfo(Request $request, SessionInterface $session, DatabaseCommunicator $dc) {
+        // get sended data for editing
         $data = json_decode($request->getContent(), true);
         $email = trim($data['email']);
         $id = trim($data['id']);
@@ -22,25 +22,30 @@ class UpdateAssociationInfoController
         $emailRegexPattern = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
         $idRegexPattern = '/^[a-zA-Z0-9]{5,}$/';
 
+        // create response object
+        $response = new JsonResponse();
+
         // check if data is set and well formatted
         if (preg_match($emailRegexPattern, $email) && preg_match($idRegexPattern, $id) && isset($text)) {
-
-            // save old session id value
+            // if yes, first save old session id value which we will need when updating data in database
             $oldId = $session->get('id');
 
             // set new id into session
             $session->set('id', $id);
 
-            // create database Communicator object
-            $dc = new DatabaseCommunicator();
-            // call its appropriete method to handle updating Association basic info
+            // call DC appropriete method to handle updating Association basic info
             $dc->updateAssociationInfo($email, $id, $text, $oldId);
 
+            // set response status code
+            $response->setStatusCode(200);
+
         } else {
-            return new JsonResponse("Bad formatted Association data");
+            // set appropriete status code
+            $response->setStatusCode(404);
         }
 
-        return new JsonResponse("info data updated");
+        // return response
+        return $response;
 
     }
 }

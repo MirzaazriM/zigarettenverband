@@ -2,12 +2,7 @@
 
 namespace App\Service;
 
-
 use App\Model\DatabaseCommunicator;
-use PHPMailer\PHPMailer\PHPMailer;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Yaml\Yaml;
 
 class TestCheckerService
 {
@@ -15,6 +10,12 @@ class TestCheckerService
     private $answers;
     private $dc;
 
+    /**
+     * When constructing TestCheckerService object set answers to check and create connection to the database
+     *
+     * TestCheckerService constructor.
+     * @param array $answers
+     */
     public function __construct(array $answers)
     {
         $this->answers = $answers;
@@ -28,22 +29,20 @@ class TestCheckerService
     public function checkTest() {
 
         try {
-
             // call appropriete method from DC to fetch correct answers on sended question ids
             $answers = $this->dc->getAnswers();
 
             // call new method inside this class which will compare given and correct answers and return how many questions user answered correct and if user passed the test or not
             $numberOfCorrectAnswers = $this->checkCorrectAnswers();
 
-            // upon data returned from previous function call function which decides if user passed the test
-            // and sends appropriete email according to the test result
+            // upon data returned from previous function call function which decides if user passed the test and sends appropriete email according to the test result
             $passed = $this->checkIfPassed($numberOfCorrectAnswers);
 
         } catch (\Exception $e) {
             die($e->getMessage());
         }
 
-        return true; // $passed;
+        return $passed;
     }
 
 
@@ -54,10 +53,9 @@ class TestCheckerService
      */
     public function checkCorrectAnswers() {
 
-        // call database and fetch correct answers
+        // TODO call database and fetch correct answers
 
-        // compare given and correct answers
-
+        // TODO compare given and correct answers
 
         // return number of correct answers
         return 12;
@@ -72,8 +70,7 @@ class TestCheckerService
      */
     public function checkIfPassed($numberOfCorrectAnswers):bool {
 
-        // compare number of correct answers to number of total questions
-        // demo
+        // compare number of correct answers to number of total questions - demo
         $totalNumberOfQuestions = 15;
 
         // check if user passed

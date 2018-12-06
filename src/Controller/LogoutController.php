@@ -6,10 +6,9 @@ class LogoutController
 {
 
     /**
-     * Handle
+     * Logout user from session and redirect to /login page
      */
     public function logout() {
-
         // check if user is logged in
         if (isset($_SESSION)) {
             // unset logged variable
@@ -21,6 +20,6 @@ class LogoutController
             // exit current script
             exit();
         }
-
     }
+
 }

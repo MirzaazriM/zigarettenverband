@@ -11,9 +11,11 @@ class EmailService
 {
     private $mail;
 
-    public function __construct() // PHPMailer $mail
+    /**
+     * EmailService constructor.
+     */
+    public function __construct()
     {
-        // $this->mail = $mail;
     }
 
 
@@ -33,7 +35,7 @@ class EmailService
             // create global PHPMailer object
             $this->mail = new PHPMailer(true);
 
-            // check first if user camed from one of the Associations page, take Association code and fetch appropriete Gutscheincode from database
+            // if Association code is not null fetch Gutscheincode from database to send via email
             if (!is_null($associationCode)) {
                 // get valid Gutscheincode from database
                 $dc = new DatabaseCommunicator();
@@ -55,7 +57,7 @@ class EmailService
 
             // set content
             $this->mail->isHTML(true);
-            $this->mail->Subject = 'Nachricht von ' . $associationName;
+            $this->mail->Subject = $associationName;
             $this->mail->Body =  (is_null($associationCode) or !isset($gutscheinData['code'])) ? $emailText : ($emailText . (' <br/> Gutscheincode is: ' . $gutscheinData['code']) );
 
             // send email
@@ -82,6 +84,36 @@ class EmailService
 
 
     /**
+     * Set email parameters before sending email
+     *
+     * @param bool $isAssociationCodeValid
+     * @param DatabaseCommunicator $dc
+     * @param string|null $associationCode
+     * @return array
+     */
+    public function setEmailParameters(bool $isAssociationCodeValid, DatabaseCommunicator $dc, string $associationCode = null):array {
+        // set if code is valid and set appropriete email data
+        if ($isAssociationCodeValid) {
+            // get email data for the specific Association according to valid value of Association code
+            $emailData = $dc->getEmailData($associationCode);
+        } else {
+            // read default email data from configuration file
+            $yaml = Yaml::parse(file_get_contents('../config/configuration/developer-info.yml'));
+            $yamlData = $yaml['info'];
+
+            // set email parametars into $emailData array
+            $emailData['email'] = $yamlData['email'];
+            $emailData['email_password'] = $yamlData['password'];
+            $emailData['email_text'] = file_get_contents('../uploaded_resources/thanks_email.txt');
+            $emailData['name'] = $yamlData['name'];
+        }
+
+        // return email data
+        return $emailData;
+    }
+
+
+    /**
      * Send alert email
      *
      * @param $receivingEmail
@@ -94,11 +126,11 @@ class EmailService
         // load email template for alert emails
         $emailAlertText = file_get_contents('../uploaded_resources/alert_email.txt');
 
-        // create new PHPMailer object
-        //$this->mail = new PHPMailer();
+        // clear addresses before sending another email
         $this->mail->clearAddresses();
 
         // send alert email
         $this->sendEmail($developerConfig['email'], $receivingEmail, $emailAlertText, $developerConfig['password'], $developerConfig['name'], null);
     }
+
 }
