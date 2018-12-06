@@ -5,21 +5,25 @@
     <head>
         <title>Test</title>
 
+        {% block stylesheets %}
+            <link href="{{ asset('css/test.css') }}" rel="stylesheet" />
+        {% endblock %}
     </head>
 
     <body>
-        <h1>Test Quiz</h1>
-        <ul>
+        <h1>Test Questions</h1>
+
+        <ol id="testList">
             {% for question in questions %}
-                <li>{{ question }}</li>
+                <li value="{{ question }}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam {{ question }}?</li>
             {% endfor %}
-        </ul>
+        </ol>
 
         <br/>
 
         {#<a href="/check/test"> Check result of the test </a>#}
         <form action="/check/test" method="post">
-            <input type="submit" value="submit"/>
+            <input id="submitButton" type="submit" value="Finish"/>
         </form>
 
         {#<button onclick="sendData()">Click</button>#}

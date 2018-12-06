@@ -11,12 +11,10 @@ use App\Model\DatabaseCommunicator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-
-
 class SystemController extends AbstractController
 {
 
-    public function showSystemData (SessionInterface $session) {
+    public function showSystemData (SessionInterface $session, DatabaseCommunicator $dc) {
 
         // get logged value from session
         $userLogged = $session->get('logged');
@@ -29,9 +27,7 @@ class SystemController extends AbstractController
             exit();
         }
 
-        // if user is logged into system  create Database Communicator object
-        $dc = new DatabaseCommunicator();
-        // call appropriete method for specific user data
+        // call appropriete method form DC for specific user data
         $systemData = $dc->getUserSystemData($session->get('email'));
 
         // set association id as session variable to use accross all pages
@@ -40,6 +36,7 @@ class SystemController extends AbstractController
 
         // render template to show to the user and populate with appropriete data
         return $this->render('/system/system.html.twig', [
+            'name' => $systemData['name'],
             'associationId' => $systemData['id'],
             'associationEmail' => $systemData['email'],
             'emailText' => $systemData['email_text'],

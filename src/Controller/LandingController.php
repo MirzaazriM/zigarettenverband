@@ -21,17 +21,16 @@ class LandingController extends AbstractController
         // check if code is approprietely set (there is ref value in URL, ref is not empty and ref follows appropriet pattern)
         if (!empty($id) && preg_match('/[^a-zA-Z0-9]*/', $id)) { // TODO adjust pattern if necessary
             // set verbandIds to session so it can be used across all pages of the app
-            // $session = new Session();
             $session->set('code', $id);
         }
 
-        // call model for fetching questions data which will be used for filling template placeholders
+        // TODO call model for fetching questions data which will be used for filling template placeholders
         $questions = $dc->getQuestions();
 
         // return view for representing data
         return $this->render('/tests/test.html.twig', [
             "questions" => [
-                1,2,3,4,5
+                1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
             ]
         ]);
 

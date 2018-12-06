@@ -12,14 +12,29 @@
     {% endblock %}
 
     {% block stylesheets %}
-        <link href="{{ asset('css/system.css') }}" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <link href="https://cdn.quilljs.com/1.1.6/quill.snow.css" rel="stylesheet">
+        <link href="{{ asset('css/system.css') }}" rel="stylesheet" />
         <style>
             #editor {
                 height: 300px;
                 position: relative;
                 bottom: 20px;
+            }
+
+            .ql-container.ql-snow {
+                //border-radius: 5px;
+                border: none;
+                outline: none;
+                box-shadow: 1px 2px 1px rgba(150, 150, 150, 0.5), -1px 0 1px rgba(150, 150, 150, 0.5);
+            }
+
+            .ql-toolbar.ql-snow {
+                //border-top-left-radius: 5px;
+                //border-top-right-radius: 5px;
+                border: none;
+                outline: none;
+                box-shadow: 1px 2px 1px rgba(150, 150, 150, 0.5), -1px 0 1px rgba(150, 150, 150, 0.5);
             }
         </style>
     {% endblock %}
@@ -31,10 +46,14 @@
 <div id="systemContainer">
 
     <div id="header">
-        <h2> Edit Association data </h2>
+        <h2> {{ name }} </h2>
         <div id="buttons">
-            <a href="/logout" id="logoutButton"> Logout </a>
-            <button id="saveDataButton" onclick="updateSystemData()">Save</button>
+            <a href="/logout" id="logoutButton"><img src="assets/icons/power-button.svg" /></a>
+            {#<button id="saveDataButton" onclick="updateSystemData()">Save</button>#}
+            <div id="saveDataButton" onclick="updateSystemData()">
+                <!-- Set given icon value -->
+                <img src="assets/icons/content-save.svg" />
+            </div>
         </div>
 
     </div>
@@ -42,21 +61,31 @@
     <div id="systemData">
 
         <input id="associationCode" class="inputFields" type="text" value="{{ associationId }}"/>
+
         <input id="associationEmail" class="inputFields" type="text" value="{{ associationEmail }}"/>
         {#<textarea id="emailText" class="inputFields">{{ emailText }}</textarea>#}
 
         <div id="editor"></div>
 
-        <p class="codesValues">Used Gutscheincodes: {{ used }}</p>
-        <p class="codesValues">Unused Gutscheincodes: {{ unused }}</p>
 
-        <h3> Import Gutscheincodes </h3>
+        <div id="gutscheincodesArea">
 
-        <div id="uploadContainer">
-            <button id="uploadButton" onclick="openUploadWindow()">Upload Codes</button>
-            <span id="uploadFileName">No file selected</span>
+            <div id="leftArea">
+                <p class="codesValues"> Un/used Gutscheincodes: {{ unused }} / {{ used }} </p>
+            </div>
+
+            <div id="rightArea">
+                <h3> Import Gutscheincodes </h3>
+
+                <div id="uploadContainer">
+                    <button id="uploadButton" onclick="openUploadWindow()">Upload Codes</button>
+                    <span id="uploadFileName">No file selected</span>
+                </div>
+            </div>
+
         </div>
 
+        <!-- Hidden element -->
         <input id="csvUploadButton" onchange="handleFileUploaded()" type="file" accept=".csv"/>
 
     </div>
@@ -65,9 +94,8 @@
 
 <script>
     var toolbarOptions = [
-        ['link'], // , 'image'
-        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-        ['blockquote', 'code-block'],
+        ['bold', 'italic', 'underline', 'strike', 'link'],        // toggled buttons
+        ['blockquote'], // 'code-block'
 
         [{ 'header': 1 }, { 'header': 2 }],               // custom button values
         [{ 'list': 'ordered'}, { 'list': 'bullet' }],

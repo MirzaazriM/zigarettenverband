@@ -15,62 +15,51 @@ body {
     padding: 10px;
     width: 100%;
     height: 80px;
-    background-color: #fff; /* #4288f7; */
+    background-color: #3e66a5; /* #4288f7; */
     box-shadow: 0 3px 2px rgba(150, 150, 150, 0.5);
 }
 
 
 #header h2 {
-    color: #333;
+    color: #fff;
 }
 
 
 #logoutButton {
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    background-color: #f45642;
-    width: 90px;
-    height: 18px;
-    display: inline-block;
-    text-align: center;
-    color: #fff;
-    padding: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    font-family: 'Roboto', 'sans-serif';
-    text-decoration: none;
-    box-shadow: 1px 2px 1px rgba(150,150,150, 0.5);
-    margin-bottom: 5px;
+    position: relative;
+    right: 15px;
+    top: 15px;
 }
 
 
-#saveDataButton {
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    background-color: #47ce1a;
-    width: 100px;
-    display: inline-block;
-    text-align: center;
-    color: #fff;
-    padding: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    font-family: 'Roboto', 'sans-serif';
-    text-decoration: none;
-    box-shadow: 1px 2px 1px rgba(150,150,150, 0.5);
-}
+/*#saveDataButton {*/
+    /*outline: none;*/
+    /*border: none;*/
+    /*border-radius: 5px;*/
+    /*background-color: #47ce1a;*/
+    /*width: 100px;*/
+    /*display: inline-block;*/
+    /*text-align: center;*/
+    /*color: #fff;*/
+    /*padding: 5px;*/
+    /*position: fixed;*/
+    /*bottom: 30px;*/
+    /*right: 30px;*/
+    /*font-size: 16px;*/
+    /*font-weight: bold;*/
+    /*cursor: pointer;*/
+    /*font-family: 'Roboto', 'sans-serif';*/
+    /*text-decoration: none;*/
+    /*box-shadow: 1px 2px 1px rgba(150,150,150, 0.5);*/
+/*}*/
 
 
 #uploadButton {
     outline: none;
     border: none;
     border-radius: 5px;
-    background-color: #f45642;
-    width: 130px;
+    background-color: #3e66a5;
+    width: 140px;
     display: inline-block;
     text-align: center;
     color: #fff;
@@ -91,12 +80,12 @@ body {
 }
 
 
-#logoutButton:hover, #saveDataButton:hover, #uploadButton:hover {
+#saveDataButton:hover, #uploadButton:hover {
     box-shadow: 2px 3px 2px rgba(150,150,150, 0.5);
 }
 
 
-#logoutButton:active, #saveDataButton:active, #uploadButton:active {
+#saveDataButton:active, #uploadButton:active {
     box-shadow: none;
 }
 
@@ -132,8 +121,7 @@ body {
     outline: none;
     height: 30px;
     font-size: 16px;
-    border-radius: 5px;
-    box-shadow: 2px 3px 2px rgba(150, 150, 150, 0.5), -2px 0 2px rgba(150, 150, 150, 0.5);
+    box-shadow: 1px 2px 1px rgba(150, 150, 150, 0.5), -1px 0 1px rgba(150, 150, 150, 0.5);
 }
 
 
@@ -171,7 +159,59 @@ body {
     margin: 0;
     padding: 0;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 22px;
 }
 
 
+
+/* Paper-fab-component */
+
+#saveDataButton {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #3e66a5;
+    z-index: 9000;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    box-shadow: 2px 2px 1px rgba(150,150,150, 0.6), -2px 2px 1px rgba(150,150,150, 0.6);
+    cursor: pointer;
+}
+
+
+#saveDataButton img {
+    position: relative;
+    top: 13px;
+    left: 13px;
+}
+
+
+#gutscheincodesArea > #leftArea {
+    display: inline-block;
+    width: 49%;
+    position: relative;
+    bottom: 15px;
+}
+
+
+#gutscheincodesArea > #rightArea {
+    display: inline-block;
+    width: 49%;
+    position: relative;
+    bottom: 5px;
+}
+
+
+@media only screen and (max-width: 820px) {
+    #gutscheincodesArea > #leftArea {
+        display: block;
+        width: 100%;
+    }
+
+
+    #gutscheincodesArea > #rightArea {
+        display: block;
+        width: 100%;
+    }
+}

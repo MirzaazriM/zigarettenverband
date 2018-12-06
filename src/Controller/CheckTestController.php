@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Service\TestCheckerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -31,7 +30,7 @@ class CheckTestController extends AbstractController
             // user passed after coming from one of the Associations page - set appropriete template and data to render
             $template = 'test_passed.html.twig';
             $templateData = [
-                'message' => 'Test passed - with code'
+                'message' => 'Test passed, enter email for Gutscheincode'
             ];
 
             // destroy session code to prevent misuse
@@ -41,7 +40,7 @@ class CheckTestController extends AbstractController
             // user passed but he/she didnt came from one of the Associations page - set appropriete template and data to render
             $template = 'test_passed.html.twig';
             $templateData = [
-                'message' => 'Test passed - no code'
+                'message' => 'Test passed, enter email for Thanks email'
             ];
         } else {
             // user failed test regardless if he/she came from one of the Associations page - set appropriete template and data to render
@@ -49,7 +48,6 @@ class CheckTestController extends AbstractController
             $templateData = [];
         }
 
-        //return new JsonResponse([2,4,5]);
         // return template to show if user passed or not passed test
         return $this->render('test_finished/' . $template, $templateData);
     }
