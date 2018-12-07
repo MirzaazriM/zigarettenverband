@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Model\DatabaseCommunicator;
+use Psr\Log\LoggerInterface;
 
 class TestCheckerService
 {
@@ -29,7 +30,7 @@ class TestCheckerService
     public function checkTest() {
 
         try {
-            // call appropriete method from DC to fetch correct answers on sended question ids
+            // call appropriate method from DC to fetch correct answers on sended question ids
             $answers = $this->dc->getAnswers();
 
             // call new method inside this class which will compare given and correct answers and return how many questions user answered correct and if user passed the test or not

@@ -35,20 +35,29 @@ class SystemController extends AbstractController
             exit();
         }
 
-        // call appropriete method from DC for specific user data
+        // call appropriate method from DC for specific user data
         $systemData = $dc->getUserSystemData($session->get('email'));
 
-        // set association id as session variable to use accross all pages, we need it when updating Association system basic info
-        $session->set('id', $systemData['id']);
+        // check if systemData is set
+        if (!empty($systemData)) {
+            // if yes, first set association id as session variable to use accross all pages, we need it when updating Association system basic info
+            $session->set('id', $systemData['id']);
 
-        // render template to show to the user and fill with appropriate data
-        return $this->render('/system/system.html.twig', [
-            'name' => $systemData['name'],
-            'associationId' => $systemData['id'],
-            'associationEmail' => $systemData['email'],
-            'emailText' => $systemData['email_text'],
-            'used' => $systemData['used_codes'],
-            'unused' => $systemData['unused_codes'],
-        ]);
+            // then render template to show to the user and fill with appropriate data
+            return $this->render('/system/system.html.twig', [
+                'name' => $systemData['name'],
+                'associationId' => $systemData['id'],
+                'associationEmail' => $systemData['email'],
+                'emailText' => $systemData['email_text'],
+                'used' => $systemData['used_codes'],
+                'unused' => $systemData['unused_codes'],
+            ]);
+        } else {
+            // if no, render appropriate error template
+            return $this->render('/error_pages/error_default.html.twig', [
+                "message" => "Couldnt fetch data"
+            ]);
+        }
+
     }
 }
