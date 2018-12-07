@@ -10,9 +10,17 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class UpdateAssociationInfoController
 {
 
-
+    /**
+     * Controller for updating Association info (id, email and email text)
+     * Inject Request, SessionInterface and DatabaseCommunicator services
+     *
+     * @param Request $request
+     * @param SessionInterface $session
+     * @param DatabaseCommunicator $dc
+     * @return JsonResponse
+     */
     public function editAssociationInfo(Request $request, SessionInterface $session, DatabaseCommunicator $dc) {
-        // get sended data for editing
+        // get sennded data for editing
         $data = json_decode($request->getContent(), true);
         $email = trim($data['email']);
         $id = trim($data['id']);
@@ -30,11 +38,11 @@ class UpdateAssociationInfoController
             // if yes, first save old session id value which we will need when updating data in database
             $oldId = $session->get('id');
 
-            // set new id into session
-            $session->set('id', $id);
-
             // call DC appropriete method to handle updating Association basic info
             $dc->updateAssociationInfo($email, $id, $text, $oldId);
+
+            // after updating info in database set new id into session
+            $session->set('id', $id);
 
             // set response status code
             $response->setStatusCode(200);

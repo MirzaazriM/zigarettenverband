@@ -1,6 +1,6 @@
-landing:
+test:
     path: '/{lang}'
-    controller: 'App\Controller\LandingController::checkCode'
+    controller: 'App\Controller\TestController::checkCode'
     requirements:
         lang: 'de|'
 

@@ -18,6 +18,9 @@ class UploadFileController
      * @return JsonResponse
      */
     public function upload(Request $request, SessionInterface $session) {
+        // create response object
+        $response = new JsonResponse();
+
         // check if there is sended file in the request object
         if (count($request->files->all()) > 0) {
             // if yes, set file to the fileRaw variable
@@ -33,18 +36,20 @@ class UploadFileController
                 $uploadService = new UploadService($name, $fileRaw['tmp_name'][0], $session->get('id'));
                 $uploadService->handleCSV();
 
+                // set response status code
+                $response->setStatusCode(200);
+
             } else {
-                return new JsonResponse("file is not .csv = " . $fileRaw['name']);
-                // die("file is not .csv");
+                // set response status code
+                $response->setStatusCode(404);
             }
 
-        // if no, return appropriete message
         } else {
-            return new JsonResponse("no file uploaded");
-            // die("no file uploaded");
+            // set response status code
+            $response->setStatusCode(404);
         }
 
-        return new JsonResponse("File uploaded");
-        // die("EEE");
+        // return response
+        return $response;
     }
 }

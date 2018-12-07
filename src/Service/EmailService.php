@@ -33,7 +33,7 @@ class EmailService
 
         try {
             // create global PHPMailer object
-            $this->mail = new PHPMailer(true);
+            $this->mail = new PHPMailer();
 
             // if Association code is not null fetch Gutscheincode from database to send via email
             if (!is_null($associationCode)) {

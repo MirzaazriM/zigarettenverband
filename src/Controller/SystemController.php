@@ -30,6 +30,7 @@ class SystemController extends AbstractController
         if ($userLogged != 'yes') {
             // return to login page
             header("Location: /login");
+
             // exit current script
             exit();
         }
@@ -37,11 +38,10 @@ class SystemController extends AbstractController
         // call appropriete method from DC for specific user data
         $systemData = $dc->getUserSystemData($session->get('email'));
 
-        // set association id as session variable to use accross all pages
-        // we need it when updating Association system basic info
+        // set association id as session variable to use accross all pages, we need it when updating Association system basic info
         $session->set('id', $systemData['id']);
 
-        // render template to show to the user and populate with appropriete data
+        // render template to show to the user and fill with appropriate data
         return $this->render('/system/system.html.twig', [
             'name' => $systemData['name'],
             'associationId' => $systemData['id'],

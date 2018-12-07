@@ -45,16 +45,16 @@ function updateSystemData() {
     var emailPattern = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
     var codePattern = /^[a-zA-Z0-9]{5,}$/;
 
-    // check if edit data well formatted
+    // check if edit data is well formatted
     if (!emailPattern.test(email) || !codePattern.test(code)) {
-        console.log("bad data");
+        alert("bad id or email data");
         // TODO tell user about bad data ? paper-toast
     } else {
         // first send request to upload new codes if file is uploaded
         var file = document.getElementById('csvUploadButton').files[0];
         if (file !== undefined || csvFile != "") {
+            // call function
             importCsvCodes();
-            console.log("There is file uploaded. Sending...");
         }
 
         // after that update association info
@@ -73,7 +73,10 @@ function updateSystemData() {
  * Function which sends request to update Association data
  */
 function updateAssociationInfo() {
+    // create XMLHttpRequest object
     var xhttp = new XMLHttpRequest();
+
+    // check response status code
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.status);
@@ -82,6 +85,8 @@ function updateAssociationInfo() {
             // TODO tell to the user
         }
     };
+
+    // send request
     xhttp.open("PUT", '/system/edit');
     xhttp.send(JSON.stringify(
         {
@@ -97,13 +102,20 @@ function updateAssociationInfo() {
  * Send uploaded CSV to the server for reading and writing in backend
  */
 function importCsvCodes() {
+    // create XMLHttpRequest object
     var xhttp = new XMLHttpRequest();
+
+    // check response status code
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            var text = JSON.parse(this.responseText);
-            console.log("After file upload: " + text);
+            console.log("File uploaded");
+        } else if (this.readyState == 4 && this.status == 404) {
+            // TODO set another way of alerting user about problem
+            alert("File not uploaded " + this.status);
         }
     };
+
+    // send request
     xhttp.open("POST", '/upload');
     xhttp.send(csvFile);
 }
