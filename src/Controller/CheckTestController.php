@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\TestCheckerService;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -11,7 +12,7 @@ class CheckTestController extends AbstractController
 {
 
     /**
-     * Function for showing appropriete page depending on if user passed the test or not
+     * Function for showing appropriate page depending if user passed the test or not
      * Inject SessionInterface service
      *
      * @param Request $request
@@ -27,15 +28,15 @@ class CheckTestController extends AbstractController
             '5' => 'd,e'
         ]);
 
-        // TODO call service method and check test answers - current dummy response
+        // TODO call service method and check test answers - currently dummy response
         $passed = $check->checkTest();
 
         // get session Association code if exits
         $sessionCode = $session->get('code');
 
-        // check $passed value and existence of Association code in session which template to return
+        // check $passed value and existence of Association code in session to decide which template to render
         if ($passed == true && isset($sessionCode)) {
-            // user passed the test after coming from one of the Associations page - set appropriete template and data to render
+            // user passed the test after coming from one of the Associations page - set appropriate template and data to render
             $template = 'test_passed.html.twig';
             $templateData = [
                 'message' => 'Test passed, enter email for Gutscheincode'
@@ -44,13 +45,13 @@ class CheckTestController extends AbstractController
             // TODO check destroying session and its implications
 
         } else if ($passed == true && !isset($sessionCode)) {
-            // user passed but he/she didnt came from one of the Associations page - set appropriete template and data to render
+            // user passed but he/she didnt came from one of the Associations page - set appropriate template and data to render
             $template = 'test_passed.html.twig';
             $templateData = [
                 'message' => 'Test passed, enter email for Thanks email'
             ];
         } else {
-            // user failed test regardless if he/she came from one of the Associations page - set appropriete template and data to render
+            // user failed test regardless if he/she came from one of the Associations page - set appropriate template and data to render
             $template = 'test_failed.html.twig';
             $templateData = [];
         }

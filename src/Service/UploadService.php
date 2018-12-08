@@ -3,6 +3,8 @@
 namespace App\Service;
 
 use App\Model\DatabaseCommunicator;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Yaml\Yaml;
 
 class UploadService
 {
@@ -10,6 +12,9 @@ class UploadService
     private $filename;
     private $tempname;
     private $id;
+    private $logger;
+    private $emailSender;
+    private $emailConfiguration;
 
     public function __construct(string $filename, string $tempname, string $id)
     {
@@ -38,7 +43,8 @@ class UploadService
             $this->deleteUploadedFile();
 
         } catch (\Exception $e) {
-            die("Error: " . $e->getMessage());
+            // log message
+
         }
 
     }

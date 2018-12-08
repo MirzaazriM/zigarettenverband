@@ -2,20 +2,14 @@
 
 namespace App\Model;
 
-use App\Service\EmailService;
 use PDO;
-use PDOException;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Yaml\Yaml;
 
 class DatabaseCommunicator
 {
 
     private $configuration;
-    private $emailConfiguration;
     private $connection;
-    private $logger;
-    private $emailSender;
 
     /**
      * Each time object of DatabaseCommunicator is created create connection to database
@@ -25,29 +19,13 @@ class DatabaseCommunicator
     public function __construct()
     {
         // when constructing DatabaseCommunicator object load necessary data for connecting to the database
-        $yaml = Yaml::parse(file_get_contents('../config/configuration/database-dev.yml'));
+        $yaml = Yaml::parse(file_get_contents('../config/configuration/config-' . getenv("APP_ENV") . '.yml'));
         $this->configuration = $yaml['config'];
 
         // connect to the database
         $this->connection = new PDO($this->configuration['dsn'], $this->configuration['user'], $this->configuration['password']);
         // set connection to throw exceptions
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    }
-
-
-    /**
-     * Inject LoggerInterface and EmailService as optional
-     *
-     * @param LoggerInterface $logger
-     */
-    public function setLogger(LoggerInterface $logger, EmailService $emailService)
-    {
-        $this->logger = $logger;
-        $this->emailSender = $emailService;
-
-        // load developer info data needed for sending email
-        $yaml = Yaml::parse(file_get_contents('../config/configuration/developer-info.yml'));
-        $this->emailConfiguration = $yaml['info'];
     }
 
 
@@ -75,8 +53,7 @@ class DatabaseCommunicator
             }
 
         } catch (\PDOException $e) {
-            // log message
-            $this->logger->error("CheckCode function: " . $e->getMessage());
+
         }
 
         // return value
@@ -127,8 +104,7 @@ class DatabaseCommunicator
             }
 
         } catch (\PDOException $e) {
-            // log message
-            $this->logger->error("InsertNewCodes function: " . $e->getMessage());
+
         }
     }
 
@@ -140,8 +116,7 @@ class DatabaseCommunicator
             // call database for answers
 
         } catch (\PDOException $e) {
-            // log message
-            $this->logger->error("GetAnswers function: " . $e->getMessage());
+
         }
 
         // return correct answers
@@ -183,10 +158,6 @@ class DatabaseCommunicator
             }
 
         } catch (\PDOException $e) {
-            // log message
-            $this->logger->error("CheckUserCredentials function: " . $e->getMessage());
-
-            // send email
 
         }
 
@@ -207,7 +178,7 @@ class DatabaseCommunicator
             // set database instructions
             $sql = "SELECT 
                         a.id,
-                        a.name, 
+                        a.name,
                         a.email, 
                         a.email_text,
                         SUM(if(ac.code_valid = 'true' AND associations_id = a.id, 1, 0)) AS unused_codes,
@@ -225,14 +196,8 @@ class DatabaseCommunicator
             $data = $statement->fetch(PDO::FETCH_ASSOC);
 
         } catch (\PDOException $e) {
-            // log message
-            $this->logger->error("GetUserSystemData function: " . $e->getMessage());
-
             // set data to return
             $data = [];
-
-            // send alert email to developer
-            $this->emailSender->sendEmail($this->emailConfiguration['email'], $this->emailConfiguration['email'], "GetUserSystemData function: " . $e->getMessage(), $this->emailConfiguration['password'], "Zigarettenverband System Error");
         }
 
         // return system data for the user
@@ -320,8 +285,7 @@ class DatabaseCommunicator
             $data = $statement->fetch(PDO::FETCH_ASSOC);
 
         } catch (\PDOException $e) {
-            // log message
-            $this->logger->error("GetEmailData function: " . $e->getMessage());
+
         }
 
         // return data
@@ -364,8 +328,7 @@ class DatabaseCommunicator
             $gutscheinCode['left'] = $totalLeft[0];
 
         } catch (\PDOException $e) {
-            // log message
-            $this->logger->error("GetGutscheincode function: " . $e->getMessage());
+
         }
 
         // return data
@@ -391,8 +354,7 @@ class DatabaseCommunicator
             ]);
 
         } catch (\PDOException $e) {
-            // log message
-            $this->logger->error("SetCodeAsUsed function: " . $e->getMessage());
+
         }
     }
 }

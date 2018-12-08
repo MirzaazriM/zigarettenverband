@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\AuthorizationCheckerService;
 use App\Service\UploadService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,18 +13,21 @@ class UploadFileController
 
     /**
      * Upload file controller
-     * Inject Request and SessionInterface services
+     * Inject Request, AuthorizationCheckerService and SessionInterface services
      *
      * @param Request $request
      * @return JsonResponse
      */
-    public function upload(Request $request, SessionInterface $session) {
+    public function upload(Request $request, SessionInterface $session, AuthorizationCheckerService $authChecker) {
+        // check if user is logged in (authorizated for making this request)
+        $authChecker->checkAuthorization();
+
         // create response object
         $response = new JsonResponse();
 
         // check if there is sended file in the request object
         if (count($request->files->all()) > 0) {
-            // if yes, set file to the fileRaw variable
+            // set file to the fileRaw variable
             $fileRaw = $_FILES['file'];
 
             // get uploaded file extension

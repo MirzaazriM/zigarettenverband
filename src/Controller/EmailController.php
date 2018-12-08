@@ -45,7 +45,7 @@ class EmailController extends AbstractController
             }
 
             // set email parameteres
-            $emailData = $emailHandler->setEmailParameters($isAssociationCodeValid, $dc, $associationCode);
+            $emailData = $emailHandler->setEmailParameters($isAssociationCodeValid, $associationCode);
 
             // send email by calling EmailService sendEmail function and passing correct parameters
             $emailHandler->sendEmail(

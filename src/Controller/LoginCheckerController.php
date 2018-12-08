@@ -34,13 +34,13 @@ class LoginCheckerController
 
         // check if formats of sended data suit to the patterns
         if (preg_match($emailRegexPattern, $email) && preg_match($passwordRegexPassword, $password)) {
-            // call DatabaseCommunicator to check if credentials are valid and return appropriete status code
+            // call DatabaseCommunicator to check if credentials are valid and return appropriate status code
             $response->setStatusCode($dc->checkUserCredentials($email, $password));
 
             // check errorMessage, if it is empty credentials are valid
             if ($response->getStatusCode() == 200) {
                 // if user logged succesfully open session and set needed session values
-                $session->set('logged', 'yes');
+                $session->set('logged', getenv("LOGGED_VALUE"));
                 $session->set('email', $email);
             }
 

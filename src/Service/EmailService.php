@@ -5,19 +5,21 @@ namespace App\Service;
 use App\Model\DatabaseCommunicator;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Yaml\Yaml;
 
-class EmailService
+class EmailService extends AbstractController
 {
     private $mail;
+    private $logger;
+    private $developerConfig;
+    private $dc;
 
-    /**
-     * EmailService constructor.
-     */
+
     public function __construct()
     {
+        $this->dc = new DatabaseCommunicator();
     }
-
 
     /**
      * Send email function
@@ -38,8 +40,8 @@ class EmailService
             // if Association code is not null fetch Gutscheincode from database to send via email
             if (!is_null($associationCode)) {
                 // get valid Gutscheincode from database
-                $dc = new DatabaseCommunicator();
-                $gutscheinData = $dc->getGutscheinCode($associationCode);
+                // $dc = new DatabaseCommunicator();
+                $gutscheinData = $this->dc->getGutscheinCode($associationCode);
             }
 
             // server settings
@@ -58,7 +60,11 @@ class EmailService
             // set content
             $this->mail->isHTML(true);
             $this->mail->Subject = $associationName;
-            $this->mail->Body =  (is_null($associationCode) or !isset($gutscheinData['code'])) ? $emailText : ($emailText . (' <br/> Gutscheincode is: ' . $gutscheinData['code']) );
+            // use renderView if code is set, so that HTTP cache line is not rendered in email message
+            $this->mail->Body =  (is_null($associationCode) or !isset($gutscheinData['code'])) ?
+                $emailText : ($emailText . $this->renderView('gutscheincode_line.html.twig', [
+                        'code' => $gutscheinData['code']
+                    ]));
 
             // send email
             $this->mail->send();
@@ -67,7 +73,7 @@ class EmailService
             // check if Gutscheincode is sent and set that code as used (false) in database
             if (!is_null($associationCode) && isset($gutscheinData['code'])) {
                 // update used gutscheinCode in database
-                $dc->setCodeAsUsed($gutscheinData['id']);
+                $this->dc->setCodeAsUsed($gutscheinData['id']);
 
                 // check if number of valid codes for specific Association dropped below the limit - demo 10
                 if (($gutscheinData['left'] - 1) == 10) {
@@ -77,7 +83,10 @@ class EmailService
             }
 
         } catch (Exception $e) {
-            die($this->mail->ErrorInfo);
+            // log message
+            $this->logger->error("SendEmail function: " . $this->mail->ErrorInfo);
+
+            // if this service is not working we can not send log via email to developer (endless loop)
         }
 
     }
@@ -87,25 +96,23 @@ class EmailService
      * Set email parameters before sending email
      *
      * @param bool $isAssociationCodeValid
-     * @param DatabaseCommunicator $dc
      * @param string|null $associationCode
      * @return array
      */
-    public function setEmailParameters(bool $isAssociationCodeValid, DatabaseCommunicator $dc, string $associationCode = null):array {
+    public function setEmailParameters(bool $isAssociationCodeValid, string $associationCode = null):array {
         // set if code is valid and set appropriete email data
         if ($isAssociationCodeValid) {
             // get email data for the specific Association according to valid value of Association code
-            $emailData = $dc->getEmailData($associationCode);
+            $emailData = $this->dc->getEmailData($associationCode);
         } else {
-            // read default email data from configuration file
-            $yaml = Yaml::parse(file_get_contents('../config/configuration/developer-info.yml'));
-            $yamlData = $yaml['info'];
+            // load developer info
+            $this->loadDeveloperData();
 
             // set email parametars into $emailData array
-            $emailData['email'] = $yamlData['email'];
-            $emailData['email_password'] = $yamlData['password'];
+            $emailData['email'] = $this->developerConfig['email'];
+            $emailData['email_password'] = $this->developerConfig['password'];
             $emailData['email_text'] = file_get_contents('../uploaded_resources/thanks_email.txt');
-            $emailData['name'] = $yamlData['name'];
+            $emailData['name'] = $this->developerConfig['name'];
         }
 
         // return email data
@@ -119,9 +126,8 @@ class EmailService
      * @param $receivingEmail
      */
     public function sendAlertEmail($receivingEmail) {
-        // load developer configuration data
-        $yaml = Yaml::parse(file_get_contents('../config/configuration/developer-info.yml'));
-        $developerConfig = $yaml['info'];
+        // load developer info
+        $this->loadDeveloperData();
 
         // load email template for alert emails
         $emailAlertText = file_get_contents('../uploaded_resources/alert_email.txt');
@@ -130,7 +136,18 @@ class EmailService
         $this->mail->clearAddresses();
 
         // send alert email
-        $this->sendEmail($developerConfig['email'], $receivingEmail, $emailAlertText, $developerConfig['password'], $developerConfig['name'], null);
+        $this->sendEmail($this->developerConfig['email'], $receivingEmail, $emailAlertText, $this->developerConfig['password'], $this->developerConfig['name'], null);
+
+    }
+
+
+    /**
+     * Load developer info from configuration if necessary
+     */
+    public function loadDeveloperData() {
+        // load developer configuration data
+        $yaml = Yaml::parse(file_get_contents('../config/configuration/developer_info-dev.yml'));
+        $this->developerConfig = $yaml['info'];
     }
 
 }

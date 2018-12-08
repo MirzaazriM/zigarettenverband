@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\DatabaseCommunicator;
+use App\Service\AuthorizationCheckerService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -19,7 +20,10 @@ class UpdateAssociationInfoController
      * @param DatabaseCommunicator $dc
      * @return JsonResponse
      */
-    public function editAssociationInfo(Request $request, SessionInterface $session, DatabaseCommunicator $dc) {
+    public function editAssociationInfo(Request $request, SessionInterface $session, DatabaseCommunicator $dc, AuthorizationCheckerService $authChecker) {
+        // check if user is logged in (authorizated for making this request)
+        $authChecker->checkAuthorization();
+
         // get sennded data for editing
         $data = json_decode($request->getContent(), true);
         $email = trim($data['email']);

@@ -8,6 +8,7 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
 use App\Model\DatabaseCommunicator;
+use App\Service\AuthorizationCheckerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -22,18 +23,9 @@ class SystemController extends AbstractController
      * @param DatabaseCommunicator $dc
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showSystemData (SessionInterface $session, DatabaseCommunicator $dc) {
-        // get logged value from session
-        $userLogged = $session->get('logged');
-
-        // check if user is logged in
-        if ($userLogged != 'yes') {
-            // return to login page
-            header("Location: /login");
-
-            // exit current script
-            exit();
-        }
+    public function showSystemData (SessionInterface $session, DatabaseCommunicator $dc, AuthorizationCheckerService $authChecker) {
+        // check if user is logged in (authorizated for making this request)
+        $authChecker->checkAuthorization();
 
         // call appropriate method from DC for specific user data
         $systemData = $dc->getUserSystemData($session->get('email'));
