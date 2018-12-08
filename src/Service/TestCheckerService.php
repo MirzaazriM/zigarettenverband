@@ -10,7 +10,6 @@ class TestCheckerService
 
     private $answers;
     private $dc;
-    private $logger;
 
     /**
      * When constructing TestCheckerService object set answers to check and create connection to the database
@@ -35,13 +34,13 @@ class TestCheckerService
             $answers = $this->dc->getAnswers();
 
             // call new method inside this class which will compare given and correct answers and return how many questions user answered correctly
-            $numberOfCorrectAnswers = $this->checkCorrectAnswers();
+            $numberOfCorrectAnswers = $this->checkCorrectAnswers($answers);
 
             // upon data returned from previous function call function which decides if user passed the test
             $passed = $this->checkIfPassed($numberOfCorrectAnswers);
 
         } catch (\Exception $e) {
-            die($e->getMessage());
+            // TODO handle exception
         }
 
         // return if user passed the test or not
@@ -52,9 +51,10 @@ class TestCheckerService
     /**
      * Check how many questions has been answered correct
      *
-     * @return bool
+     * @param array $answers
+     * @return int
      */
-    public function checkCorrectAnswers() {
+    public function checkCorrectAnswers(array $answers):int {
 
         // TODO call database and fetch correct answers
 
@@ -72,6 +72,8 @@ class TestCheckerService
      * @return bool
      */
     public function checkIfPassed($numberOfCorrectAnswers):bool {
+
+        // TODO check implementation
 
         // compare number of correct answers to number of total questions - demo
         $totalNumberOfQuestions = 15;

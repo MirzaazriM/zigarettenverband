@@ -15,11 +15,11 @@ class EmailService extends AbstractController
     private $developerConfig;
     private $dc;
 
-
     public function __construct()
     {
         $this->dc = new DatabaseCommunicator();
     }
+
 
     /**
      * Send email function
@@ -83,10 +83,7 @@ class EmailService extends AbstractController
             }
 
         } catch (Exception $e) {
-            // log message
-            $this->logger->error("SendEmail function: " . $this->mail->ErrorInfo);
-
-            // if this service is not working we can not send log via email to developer (endless loop)
+            // TODO handle exception
         }
 
     }
@@ -100,19 +97,28 @@ class EmailService extends AbstractController
      * @return array
      */
     public function setEmailParameters(bool $isAssociationCodeValid, string $associationCode = null):array {
-        // set if code is valid and set appropriete email data
-        if ($isAssociationCodeValid) {
-            // get email data for the specific Association according to valid value of Association code
-            $emailData = $this->dc->getEmailData($associationCode);
-        } else {
-            // load developer info
-            $this->loadDeveloperData();
 
-            // set email parametars into $emailData array
-            $emailData['email'] = $this->developerConfig['email'];
-            $emailData['email_password'] = $this->developerConfig['password'];
-            $emailData['email_text'] = file_get_contents('../uploaded_resources/thanks_email.txt');
-            $emailData['name'] = $this->developerConfig['name'];
+        try {
+            // set if code is valid and set appropriete email data
+            if ($isAssociationCodeValid) {
+                // get email data for the specific Association according to valid value of Association code
+                $emailData = $this->dc->getEmailData($associationCode);
+            } else {
+                // load developer info
+                $this->loadDeveloperData();
+
+                // set email parametars into $emailData array
+                $emailData['email'] = $this->developerConfig['email'];
+                $emailData['email_password'] = $this->developerConfig['password'];
+                $emailData['email_text'] = file_get_contents('../uploaded_resources/thanks_email.txt');
+                $emailData['name'] = $this->developerConfig['name'];
+            }
+
+        } catch (\Exception $e) {
+            // set data to return
+            $emailData = [];
+
+            // TODO handle exception
         }
 
         // return email data
@@ -126,17 +132,23 @@ class EmailService extends AbstractController
      * @param $receivingEmail
      */
     public function sendAlertEmail($receivingEmail) {
-        // load developer info
-        $this->loadDeveloperData();
 
-        // load email template for alert emails
-        $emailAlertText = file_get_contents('../uploaded_resources/alert_email.txt');
+        try {
+            // load developer info
+            $this->loadDeveloperData();
 
-        // clear addresses before sending another email
-        $this->mail->clearAddresses();
+            // load email template for alert emails
+            $emailAlertText = file_get_contents('../uploaded_resources/alert_email.txt');
 
-        // send alert email
-        $this->sendEmail($this->developerConfig['email'], $receivingEmail, $emailAlertText, $this->developerConfig['password'], $this->developerConfig['name'], null);
+            // clear addresses before sending another email
+            $this->mail->clearAddresses();
+
+            // send alert email
+            $this->sendEmail($this->developerConfig['email'], $receivingEmail, $emailAlertText, $this->developerConfig['password'], $this->developerConfig['name'], null);
+
+        } catch (\Exception $e) {
+            // TODO handle exception
+        }
 
     }
 
@@ -145,9 +157,16 @@ class EmailService extends AbstractController
      * Load developer info from configuration if necessary
      */
     public function loadDeveloperData() {
-        // load developer configuration data
-        $yaml = Yaml::parse(file_get_contents('../config/configuration/developer_info-dev.yml'));
-        $this->developerConfig = $yaml['info'];
+
+        try {
+            // load developer configuration data
+            $yaml = Yaml::parse(file_get_contents('../config/configuration/developer_info-dev.yml'));
+            $this->developerConfig = $yaml['info'];
+
+        } catch (\Exception $e) {
+            // TODO handle exception
+        }
+
     }
 
 }

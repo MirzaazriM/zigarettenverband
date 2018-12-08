@@ -53,7 +53,7 @@ class DatabaseCommunicator
             }
 
         } catch (\PDOException $e) {
-
+            // TODO handle exception
         }
 
         // return value
@@ -71,7 +71,7 @@ class DatabaseCommunicator
         try {
 
         } catch (\PDOException $e) {
-
+            // TODO handle exception
         }
 
         return [];
@@ -104,7 +104,7 @@ class DatabaseCommunicator
             }
 
         } catch (\PDOException $e) {
-
+            // TODO handle exception
         }
     }
 
@@ -116,7 +116,7 @@ class DatabaseCommunicator
             // call database for answers
 
         } catch (\PDOException $e) {
-
+            // TODO handle exception
         }
 
         // return correct answers
@@ -158,7 +158,7 @@ class DatabaseCommunicator
             }
 
         } catch (\PDOException $e) {
-
+            // TODO handle exception
         }
 
         // return code value
@@ -198,6 +198,8 @@ class DatabaseCommunicator
         } catch (\PDOException $e) {
             // set data to return
             $data = [];
+
+            // TODO handle exception
         }
 
         // return system data for the user
@@ -251,7 +253,7 @@ class DatabaseCommunicator
             }
 
         } catch (\PDOException $e) {
-            die($e->getMessage());
+            // TODO handle exception
         }
     }
 
@@ -285,7 +287,7 @@ class DatabaseCommunicator
             $data = $statement->fetch(PDO::FETCH_ASSOC);
 
         } catch (\PDOException $e) {
-
+            // TODO handle exception
         }
 
         // return data
@@ -328,7 +330,7 @@ class DatabaseCommunicator
             $gutscheinCode['left'] = $totalLeft[0];
 
         } catch (\PDOException $e) {
-
+            // TODO handle exception
         }
 
         // return data
@@ -354,7 +356,7 @@ class DatabaseCommunicator
             ]);
 
         } catch (\PDOException $e) {
-
+            // TODO handle exception
         }
     }
 }

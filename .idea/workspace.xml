@@ -2,32 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="450bdee7-1bf2-46fc-bf9c-a452cd20c582" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/codes_empty.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/configuration/developer_info-prod.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Service/AuthorizationCheckerService.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/gutscheincode_line.html.twig" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/composer.lock" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Controller/ExceptionController.php" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config/configuration/database-dev.yml" afterPath="$PROJECT_DIR$/config/configuration/config-dev.yml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config/configuration/database-prod.yml" afterPath="$PROJECT_DIR$/config/configuration/config-prod.yml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config/configuration/developer-info.yml" afterPath="$PROJECT_DIR$/config/configuration/developer_info-dev.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.env" afterPath="$PROJECT_DIR$/.env" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/services.yaml" afterPath="$PROJECT_DIR$/config/services.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/system.css" afterPath="$PROJECT_DIR$/public/css/system.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/CheckTestController.php" afterPath="$PROJECT_DIR$/src/Controller/CheckTestController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/EmailController.php" afterPath="$PROJECT_DIR$/src/Controller/EmailController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/LoginCheckerController.php" afterPath="$PROJECT_DIR$/src/Controller/LoginCheckerController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/LoginController.php" afterPath="$PROJECT_DIR$/src/Controller/LoginController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/SystemController.php" afterPath="$PROJECT_DIR$/src/Controller/SystemController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/UpdateAssociationInfoController.php" afterPath="$PROJECT_DIR$/src/Controller/UpdateAssociationInfoController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/UploadFileController.php" afterPath="$PROJECT_DIR$/src/Controller/UploadFileController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Model/DatabaseCommunicator.php" afterPath="$PROJECT_DIR$/src/Model/DatabaseCommunicator.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Service/EmailService.php" afterPath="$PROJECT_DIR$/src/Service/EmailService.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Service/TestCheckerService.php" afterPath="$PROJECT_DIR$/src/Service/TestCheckerService.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Service/UploadService.php" afterPath="$PROJECT_DIR$/src/Service/UploadService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symfony.lock" afterPath="$PROJECT_DIR$/symfony.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/system/system.html.twig" afterPath="$PROJECT_DIR$/templates/system/system.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -38,28 +17,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name=".env" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.env">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="25" lean-forward="false" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmailService.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Service/EmailService.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-496">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -133,14 +91,14 @@
         <option value="$PROJECT_DIR$/src/Service/AuthorizationCheckerService.php" />
         <option value="$PROJECT_DIR$/src/Controller/UploadFileController.php" />
         <option value="$PROJECT_DIR$/codes_empty.csv" />
-        <option value="$PROJECT_DIR$/src/Service/UploadService.php" />
         <option value="$PROJECT_DIR$/var/log/dev-2018-12-08.log" />
-        <option value="$PROJECT_DIR$/src/Controller/EmailController.php" />
         <option value="$PROJECT_DIR$/config/services.yaml" />
         <option value="$PROJECT_DIR$/src/Controller/CheckTestController.php" />
-        <option value="$PROJECT_DIR$/src/Service/TestCheckerService.php" />
+        <option value="$PROJECT_DIR$/src/Controller/EmailController.php" />
         <option value="$PROJECT_DIR$/src/Service/EmailService.php" />
+        <option value="$PROJECT_DIR$/src/Service/TestCheckerService.php" />
         <option value="$PROJECT_DIR$/src/Model/DatabaseCommunicator.php" />
+        <option value="$PROJECT_DIR$/src/Service/UploadService.php" />
       </list>
     </option>
   </component>
@@ -490,18 +448,17 @@
       <workItem from="1544083376080" duration="21619000" />
       <workItem from="1544169304074" duration="10900000" />
       <workItem from="1544202820275" duration="10561000" />
-      <workItem from="1544254785614" duration="24298000" />
+      <workItem from="1544254785614" duration="27136000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="168705000" />
+    <option name="totallyTimeSpent" value="171543000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2641357" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2641357" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -854,16 +811,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Service/UploadService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="16" lean-forward="false" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-          <folding>
-            <element signature="e#31#66#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/services.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="453">
@@ -890,8 +837,64 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Service/TestCheckerService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-252">
-          <caret line="20" column="46" lean-forward="false" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
+        <state relative-caret-position="-177">
+          <caret line="42" column="36" lean-forward="false" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
+          <folding>
+            <element signature="e#31#66#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/EmailController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="659">
+          <caret line="49" column="31" lean-forward="false" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
+          <folding>
+            <element signature="e#34#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Service/EmailService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2102">
+          <caret line="166" column="36" lean-forward="false" selection-start-line="166" selection-start-column="36" selection-end-line="166" selection-end-column="36" />
+          <folding>
+            <element signature="e#31#66#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/DatabaseCommunicator.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="337" column="5" lean-forward="true" selection-start-line="337" selection-start-column="5" selection-end-line="337" selection-end-column="5" />
+          <folding>
+            <element signature="e#29#37#0#PHP" expanded="true" />
+            <marker date="1544302231743" expanded="true" signature="1159:1166" ph="SELECT id FR... " />
+            <marker date="1544302231743" expanded="true" signature="1159:1199" ph="SELECT id FR... associations" />
+            <marker date="1544302231743" expanded="true" signature="2223:2375" ph="INSERT INTO association_codes" />
+            <marker date="1544302231743" expanded="true" signature="3363:3424" ph="SELECT email... associations" />
+            <marker date="1544302231743" expanded="true" signature="4579:5128" ph="SELECT a.id,... associations" />
+            <marker date="1544302231743" expanded="true" signature="5943:6010" ph="UPDATE assoc... " />
+            <marker date="1544302231743" expanded="true" signature="5943:6011" ph="UPDATE assoc... " />
+            <marker date="1544302231743" expanded="true" signature="5943:6078" ph="UPDATE assoc... " />
+            <marker date="1544302231743" expanded="true" signature="5943:6150" ph="UPDATE assoc... " />
+            <marker date="1544302231743" expanded="true" signature="6582:6674" ph="UPDATE SET... " />
+            <marker date="1544302231743" expanded="true" signature="6582:6815" ph="UPDATE assoc... " />
+            <marker date="1544302231743" expanded="true" signature="7530:7786" ph="SELECT a.id,... associations" />
+            <marker date="1544302231743" expanded="true" signature="8415:8641" ph="SELECT id, c... association_codes" />
+            <marker date="1544302231743" expanded="true" signature="9793:9888" ph="UPDATE assoc... " />
+            <marker date="1544302231743" expanded="true" signature="9793:9889" ph="UPDATE assoc... " />
+            <marker date="1544302231743" expanded="true" signature="9793:9895" ph="UPDATE assoc... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Service/UploadService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="87" column="18" lean-forward="false" selection-start-line="87" selection-start-column="18" selection-end-line="87" selection-end-column="18" />
           <folding>
             <element signature="e#31#66#0#PHP" expanded="true" />
           </folding>
@@ -900,54 +903,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/CheckTestController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
+        <state relative-caret-position="94">
           <caret line="28" column="9" lean-forward="false" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
           <folding>
             <element signature="e#34#69#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/EmailController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <element signature="e#34#69#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/DatabaseCommunicator.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding>
-            <marker date="1544294053062" expanded="true" signature="1159:1166" ph="SELECT id FR... " />
-            <marker date="1544294053062" expanded="true" signature="1159:1199" ph="SELECT id FR... associations" />
-            <marker date="1544294053062" expanded="true" signature="2151:2303" ph="INSERT INTO association_codes" />
-            <marker date="1544294053062" expanded="true" signature="3219:3280" ph="SELECT email... associations" />
-            <marker date="1544294053062" expanded="true" signature="4399:4948" ph="SELECT a.id,... associations" />
-            <marker date="1544294053062" expanded="true" signature="5725:5792" ph="UPDATE assoc... " />
-            <marker date="1544294053062" expanded="true" signature="5725:5793" ph="UPDATE assoc... " />
-            <marker date="1544294053062" expanded="true" signature="5725:5860" ph="UPDATE assoc... " />
-            <marker date="1544294053062" expanded="true" signature="5725:5932" ph="UPDATE assoc... " />
-            <marker date="1544294053062" expanded="true" signature="6364:6456" ph="UPDATE SET... " />
-            <marker date="1544294053062" expanded="true" signature="6364:6597" ph="UPDATE assoc... " />
-            <marker date="1544294053062" expanded="true" signature="7310:7566" ph="SELECT a.id,... associations" />
-            <marker date="1544294053062" expanded="true" signature="8159:8385" ph="SELECT id, c... association_codes" />
-            <marker date="1544294053062" expanded="true" signature="9501:9596" ph="UPDATE assoc... " />
-            <marker date="1544294053062" expanded="true" signature="9501:9597" ph="UPDATE assoc... " />
-            <marker date="1544294053062" expanded="true" signature="9501:9603" ph="UPDATE assoc... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Service/EmailService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-496">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>

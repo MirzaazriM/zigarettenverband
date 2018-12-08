@@ -12,9 +12,6 @@ class UploadService
     private $filename;
     private $tempname;
     private $id;
-    private $logger;
-    private $emailSender;
-    private $emailConfiguration;
 
     public function __construct(string $filename, string $tempname, string $id)
     {
@@ -43,8 +40,7 @@ class UploadService
             $this->deleteUploadedFile();
 
         } catch (\Exception $e) {
-            // log message
-
+            // TODO handle exception
         }
 
     }
@@ -55,7 +51,9 @@ class UploadService
      */
     public function uploadCSV() {
         // move uploaded file to destination folder
-        move_uploaded_file($this->tempname, "../uploaded_resources/" . $this->filename);
+        if (!move_uploaded_file($this->tempname, "../uploaded_resources/" . $this->filename)) {
+            throw new \Exception("Failed to move file o temporary folder");
+        }
     }
 
 
