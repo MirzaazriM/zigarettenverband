@@ -4,19 +4,18 @@ namespace App\Controller;
 
 use App\Service\AuthorizationCheckerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class LoginController extends AbstractController
 {
 
     /**
      * Check if user is logged in, if no render appropriate template
-     * Inject SessionInterface service
+     * Inject AuthorizationCheckerService service
      *
-     * @param SessionInterface $session
+     * @param AuthorizationCheckerService $authChecker
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function login(SessionInterface $session, AuthorizationCheckerService $authChecker) {
+    public function login(AuthorizationCheckerService $authChecker) {
         // check if user is logged in, if yes redirect to /system page
         $authChecker->checkAuthorization("/login");
 

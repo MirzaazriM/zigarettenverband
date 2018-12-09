@@ -9,14 +9,12 @@ function checkLoginData() {
     // check status code and make appropriete action
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.status);
+            // if credentials are ok redirect to /system page
             location.href = "/system";
         } else if (this.readyState == 4 && this.status == 401) {
-            console.log(this.status);
             document.getElementById("errorMessage").innerHTML =
-                "Bad credentials";
+                "Invalid credentials";
         } else if (this.readyState == 4 && this.status == 404) {
-            console.log(this.status);
             document.getElementById("errorMessage").innerHTML =
                 "Bad formatted email or password";
         }

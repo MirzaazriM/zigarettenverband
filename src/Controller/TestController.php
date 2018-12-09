@@ -39,7 +39,7 @@ class TestController extends AbstractController
         // render template, give it values and return it
         return $this->render('/tests/test.html.twig', [
             "questions" => [
-                1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 // TODO replace dummy with real data
+                1,2,3,4,5,6,7,8 // TODO replace dummy with real data
             ]
         ]);
 

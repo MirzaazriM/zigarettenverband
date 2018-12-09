@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\DatabaseCommunicator;
 use App\Service\AuthorizationCheckerService;
+use App\Service\RegexCheckerService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -13,18 +14,20 @@ class UpdateAssociationInfoController
 
     /**
      * Controller for updating Association info (id, email and email text)
-     * Inject Request, SessionInterface and DatabaseCommunicator services
+     * Inject Request, SessionInterface, RegexCheckerService, AuthorizationCheckerService and DatabaseCommunicator services
      *
      * @param Request $request
      * @param SessionInterface $session
      * @param DatabaseCommunicator $dc
+     * @param AuthorizationCheckerService $authChecker
+     * @param RegexCheckerService $regex
      * @return JsonResponse
      */
-    public function editAssociationInfo(Request $request, SessionInterface $session, DatabaseCommunicator $dc, AuthorizationCheckerService $authChecker) {
-        // check if user is logged in (authorizated for making this request)
+    public function editAssociationInfo(Request $request, SessionInterface $session, DatabaseCommunicator $dc, AuthorizationCheckerService $authChecker, RegexCheckerService $regex) {
+        // check if user is logged in (authorized for making this request)
         $authChecker->checkAuthorization();
 
-        // get sennded data for editing
+        // get data for editing
         $data = json_decode($request->getContent(), true);
         $email = trim($data['email']);
         $id = trim($data['id']);
@@ -37,12 +40,12 @@ class UpdateAssociationInfoController
         // create response object
         $response = new JsonResponse();
 
-        // check if data is set and well formatted
-        if (preg_match($emailRegexPattern, $email) && preg_match($idRegexPattern, $id) && isset($text)) {
+        // check if necessary data is set and well formatted
+        if ($regex->checkRegex($emailRegexPattern, $email) && $regex->checkRegex($idRegexPattern, $id) && strlen($text) > 20) {
             // if yes, first save old session id value which we will need when updating data in database
             $oldId = $session->get('id');
 
-            // call DC appropriete method to handle updating Association basic info
+            // call DC appropriate method to handle updating Association basic info
             $dc->updateAssociationInfo($email, $id, $text, $oldId);
 
             // after updating info in database set new id into session
@@ -52,12 +55,11 @@ class UpdateAssociationInfoController
             $response->setStatusCode(200);
 
         } else {
-            // set appropriete status code
+            // set appropriate status code
             $response->setStatusCode(404);
         }
 
         // return response
         return $response;
-
     }
 }

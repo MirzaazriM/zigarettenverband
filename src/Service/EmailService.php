@@ -6,7 +6,6 @@ use App\Model\DatabaseCommunicator;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Yaml\Yaml;
 
 class EmailService extends AbstractController
 {
@@ -61,13 +60,18 @@ class EmailService extends AbstractController
             $this->mail->isHTML(true);
             $this->mail->Subject = $associationName;
             // use renderView if code is set, so that HTTP cache line is not rendered in email message
-            $this->mail->Body =  (is_null($associationCode) or !isset($gutscheinData['code'])) ?
-                $emailText : ($emailText . $this->renderView('gutscheincode_line.html.twig', [
-                        'code' => $gutscheinData['code']
-                    ]));
+            $this->mail->Body =  $this->setEmailBody(
+                $emailText,
+                isset($associationCode) ? $associationCode  : null,
+                isset($gutscheinData['code']) ? $gutscheinData['code'] : null
+            );
 
             // send email
             $this->mail->send();
+
+            // TODO handle sending multiple emails after user passed the test ? redirect to another page
+            // clear session
+            session_destroy();
 
             // if script execution comes to this line it means that mail is successfully sent (if email address is valid),
             // check if Gutscheincode is sent and set that code as used (false) in database
@@ -104,8 +108,9 @@ class EmailService extends AbstractController
                 // get email data for the specific Association according to valid value of Association code
                 $emailData = $this->dc->getEmailData($associationCode);
             } else {
-                // load developer info
-                $this->loadDeveloperData();
+                // get developer info
+                $configurationLoader = new ConfigurationLoaderService('../config/configuration/config-' . getenv("APP_ENV") . '.yml');
+                $this->developerConfig = $configurationLoader->getDeveloperInfo();
 
                 // set email parametars into $emailData array
                 $emailData['email'] = $this->developerConfig['email'];
@@ -134,8 +139,9 @@ class EmailService extends AbstractController
     public function sendAlertEmail($receivingEmail) {
 
         try {
-            // load developer info
-            $this->loadDeveloperData();
+            // get developer info
+            $configurationLoader = new ConfigurationLoaderService('../config/configuration/config-' . getenv("APP_ENV") . '.yml');
+            $this->developerConfig = $configurationLoader->getDeveloperInfo();
 
             // load email template for alert emails
             $emailAlertText = file_get_contents('../uploaded_resources/alert_email.txt');
@@ -154,19 +160,24 @@ class EmailService extends AbstractController
 
 
     /**
-     * Load developer info from configuration if necessary
+     * Set appropriate email body
+     *
+     * @param string $associationCode
+     * @param string $code
+     * @param string $emailText
+     * @return string
      */
-    public function loadDeveloperData() {
-
-        try {
-            // load developer configuration data
-            $yaml = Yaml::parse(file_get_contents('../config/configuration/developer_info-dev.yml'));
-            $this->developerConfig = $yaml['info'];
-
-        } catch (\Exception $e) {
-            // TODO handle exception
+    public function setEmailBody(string $emailText, string $associationCode = null, string $code = null) {
+        // check if there is $associationCode or Gutscheincode set
+        if (is_null($associationCode) or !isset($code)) {
+            // if nothing is set return just $emailText
+            return $emailText;
+        } else {
+            // add Gutscheincode line to the email text and return
+            return $emailText . $this->renderView('gutscheincode_line.html.twig', [
+                    'code' => $code
+                ]);
         }
-
     }
 
 }

@@ -2,8 +2,8 @@
 
 namespace App\Model;
 
+use App\Service\ConfigurationLoaderService;
 use PDO;
-use Symfony\Component\Yaml\Yaml;
 
 class DatabaseCommunicator
 {
@@ -19,8 +19,9 @@ class DatabaseCommunicator
     public function __construct()
     {
         // when constructing DatabaseCommunicator object load necessary data for connecting to the database
-        $yaml = Yaml::parse(file_get_contents('../config/configuration/config-' . getenv("APP_ENV") . '.yml'));
-        $this->configuration = $yaml['config'];
+        // get developer info
+        $configurationLoader = new ConfigurationLoaderService('../config/configuration/config-' . getenv("APP_ENV") . '.yml');
+        $this->configuration = $configurationLoader->getDatabaseInfo();
 
         // connect to the database
         $this->connection = new PDO($this->configuration['dsn'], $this->configuration['user'], $this->configuration['password']);

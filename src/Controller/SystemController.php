@@ -16,23 +16,24 @@ class SystemController extends AbstractController
 {
 
     /**
-     * Show system page to the user after user succcesfully logged in
-     * Inject SessionInterface and DatabaseCommunicator services
+     * Show system page to the user after user successfully logged in
+     * Inject SessionInterface, AuthorizationCheckerService and DatabaseCommunicator services
      *
      * @param SessionInterface $session
      * @param DatabaseCommunicator $dc
+     * @param AuthorizationCheckerService $authChecker
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showSystemData (SessionInterface $session, DatabaseCommunicator $dc, AuthorizationCheckerService $authChecker) {
-        // check if user is logged in (authorizated for making this request)
+        // check if user is logged in (authorized for making this request)
         $authChecker->checkAuthorization();
 
-        // call appropriate method from DC for specific user data
+        // if yes, call appropriate method from DC for specific user data
         $systemData = $dc->getUserSystemData($session->get('email'));
 
         // check if systemData is set
         if (!empty($systemData)) {
-            // if yes, first set association id as session variable to use accross all pages, we need it when updating Association system basic info
+            // if yes, first set association id as session variable to use across all pages, we need it when updating Association system basic info
             $session->set('id', $systemData['id']);
 
             // then render template to show to the user and fill with appropriate data
@@ -44,6 +45,7 @@ class SystemController extends AbstractController
                 'used' => $systemData['used_codes'],
                 'unused' => $systemData['unused_codes'],
             ]);
+
         } else {
             // if no, render appropriate error template
             return $this->render('/error_pages/error_default.html.twig', [

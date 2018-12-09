@@ -23,14 +23,14 @@ h1 {
 #emailContainer {
     display: flex;
     flex-direction: row;
-    height: 40px;
+    height: 35px;
     justify-content: center;
 }
 
 
 #emailContainer span {
-    background-color: #fff;
-    color: #333;
+    background-color: green;
+    color: #fff;
     display: inline-block;
     padding: 10px;
     border-top-left-radius: 5px;
@@ -44,7 +44,8 @@ h1 {
     text-indent: 5px;
     font-family: 'Roboto', 'sans-serif';
     font-size: 14px;
-    background-color: #bbb;
+    background-color: #fff;
+    color: #333;
     width: 200px;
 }
 
@@ -52,9 +53,9 @@ h1 {
 #emailContainer button {
     border: none;
     outline: none;
-    background-color: #fff; // #ed1245;
+    background-color: green; // #ed1245;
     font-size: 14px;
-    color: #333;
+    color: #fff;
     cursor: pointer;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;

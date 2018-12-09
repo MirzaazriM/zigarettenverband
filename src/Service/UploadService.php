@@ -3,8 +3,6 @@
 namespace App\Service;
 
 use App\Model\DatabaseCommunicator;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\Yaml\Yaml;
 
 class UploadService
 {
@@ -52,7 +50,7 @@ class UploadService
     public function uploadCSV() {
         // move uploaded file to destination folder
         if (!move_uploaded_file($this->tempname, "../uploaded_resources/" . $this->filename)) {
-            throw new \Exception("Failed to move file o temporary folder");
+            throw new \Exception("Failed to move file to temporary folder");
         }
     }
 
@@ -69,6 +67,10 @@ class UploadService
 
         // check if is anything red from file
         if (count($csv) === 1 && $csv[0] === '') {
+            // first delete uploaded empty file
+            $this->deleteUploadedFile();
+
+            // throw exception
             throw new \Exception('Uploaded file is empty');
         }
 

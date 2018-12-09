@@ -14,10 +14,13 @@ class LogoutController
      * @param SessionInterface $session
      */
     public function logout(SessionInterface $session) {
+        // get logged variable
+        $userLogged = $session->get('logged');
+
         // check if user is logged in
-        if (isset($_SESSION)) {
+        if (isset($userLogged)) {
             // unset logged variable
-            $session->set('logged_in', null);
+            $session->set('logged', null);
 
             // destroy session
             $session->clear();

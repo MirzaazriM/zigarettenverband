@@ -1,4 +1,9 @@
-config:
-    dsn: ''
-    user: ''
-    password: ''
+database_info:
+    dsn: 'mysql:host=localhost;dbname=zigarettenverband'
+    user: 'root'
+    password: 'root'
+
+developer_info:
+    name: 'Smartlab'
+    email: 'mirzao@smartlab.ba'
+    password: 'hqivmzmqjodlwahv'

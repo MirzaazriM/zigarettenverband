@@ -1,10 +1,10 @@
 
-// var global script variables
+// global script variables
 var csvFile = "";
 
 
 /**
- * Function for opening upload window after clicking on button element
+ * Function for opening upload window after clicking on fake button element
  */
 function openUploadWindow(){
     // open upload window
@@ -36,20 +36,22 @@ function handleFileUploaded() {
 
 
 /**
- * Update system data and upload CSV file if is uploaded
+ * Update system data and upload CSV file if it is uploaded
  */
 function updateSystemData() {
     // before sending data check if id and email follow specified pattern
     var email = document.getElementById('associationEmail').value;
     var code =  document.getElementById('associationCode').value;
+    var emailText = document.getElementsByClassName('ql-editor')[0].innerHTML;
     var emailPattern = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
     var codePattern = /^[a-zA-Z0-9]{5,}$/;
 
     // check if edit data is well formatted
-    if (!emailPattern.test(email) || !codePattern.test(code)) {
-        alert("bad id or email data");
+    if (!emailPattern.test(email) || !codePattern.test(code) || emailText.length <= 20) {
+        alert("bad id, email text or email data");
         // TODO tell user about bad data ? paper-toast
     } else {
+        // TODO set progress bar
         // first send request to upload new codes if file is uploaded
         var file = document.getElementById('csvUploadButton').files[0];
         if (file !== undefined || csvFile != "") {
@@ -60,10 +62,12 @@ function updateSystemData() {
         // after that update association info
         updateAssociationInfo();
 
-        // reload page after data is updated (wait 2 seconds to asynchronous requests finish)
+        // reload page after data is updated (wait 2 seconds for asynchronous request to finish)
         setTimeout(function() {
              location.href = "/system";
         }, 2000);
+
+        // TODO alert user that everything passed ok
     }
 
 }

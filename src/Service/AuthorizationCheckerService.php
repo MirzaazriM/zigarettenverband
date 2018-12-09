@@ -38,6 +38,7 @@ class AuthorizationCheckerService
             if ($userLogged == getenv("LOGGED_VALUE")) {
                 // redirect to system page
                 header('Location: /system');
+
                 // then exit current script
                 exit();
             }

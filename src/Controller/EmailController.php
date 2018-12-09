@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\DatabaseCommunicator;
 use App\Service\EmailService;
+use App\Service\RegexCheckerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,15 +15,16 @@ class EmailController extends AbstractController
 
     /**
      * Check sending email to the user
-     * Inject Request, SessionInterface, EmailService and DatabaseCommunicator services
+     * Inject Request, SessionInterface, EmailService, RegexCheckerService and DatabaseCommunicator services
      *
      * @param Request $request
      * @param SessionInterface $session
      * @param EmailService $emailHandler
      * @param DatabaseCommunicator $dc
+     * @param RegexCheckerService $regex
      * @return JsonResponse
      */
-    public function checkEmail(Request $request, SessionInterface $session, EmailService $emailHandler, DatabaseCommunicator $dc) {
+    public function checkEmail(Request $request, SessionInterface $session, EmailService $emailHandler, DatabaseCommunicator $dc, RegexCheckerService $regex) {
         // first get email from user
         $data = json_decode($request->getContent(), true);
         $email = $data['email'];
@@ -34,7 +36,7 @@ class EmailController extends AbstractController
         $response = new JsonResponse("Response");
 
         // check if email is right formatted
-        if (preg_match($emailRegexPattern, $email)) {
+        if ($regex->checkRegex($emailRegexPattern, $email)) {
             // get Association code from session if exists - this is necessary so that we take correct Gutscheincode from the database
             $associationCode = $session->get('code');
 
